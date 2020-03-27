@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="天行健，君子以自强不息"><meta name="keywords" content="乘风,hexiii,随风而逝"><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/cssmini_index/css/style.css?v=2.0.4"><link rel="stylesheet" type="text/css" href="/cssmini_index/css/highlight.css?v=2.0.4"><link rel="Shortcut Icon" href="/cssmini_index/favicon.ico"><link rel="bookmark" href="/cssmini_index/favicon.ico"><link rel="apple-touch-icon" href="/cssmini_index/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/cssmini_index/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/cssmini_index/atom.xml"><title>SpringBoot、SpringCloud、dubbo、zookeeper之间的区别 | 随风而逝</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</h1><a id="logo" href="/cssmini_index/.">随风而逝</a><p id="hitokoto" class="description">天行健，君子以自强不息</p><p id="from" class="description"></p></div><div id="nav-menu"><a href="/cssmini_index/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/cssmini_index/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/cssmini_index/about/"><i class="fa fa-user"> 关于</i></a><a href="/cssmini_index/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</h1><div class="post-meta"><a href="/cssmini_index/2020/03/18/SpringBoot%E3%80%81SpringCloud%E3%80%81dubbo%E3%80%81zookeeper%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/#comments" class="comment-count"></a><p><span class="date">Mar 18, 2020</span><span><a href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/" class="category">转载</a><a href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/%E5%BC%80%E5%8F%91/" class="category">开发</a></span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><p><a href="https://www.jianshu.com/p/945fdab6eb37" target="_blank" rel="noopener">转载出处</a></p>
+<p>作者：ssttIsme</p>
+<p>我做过SpringBoot和SpringCloud的项目。我们项目中使用很多技术来构建我们的项目。</p>
+<p>SpringBoot来构建我们的项目，使用SpringCloud相关技术来实现微服务架构。</p>
+<p>SpringBoot是一个基于maven的项目构建工具。目前我们使用版本比较稳定的1.5.6.项目后期我们项目组使用STS，Spring集成eclipse。</p>
+<p>使用SpringCloud微服务框架，我们项目组之前还有dubbo+zookeeper。微服务框架内容非常广泛，我们项目中使用Eurka注册中心，Ribbon前端负载均衡(在本地有缓存-转向服务的列表-该列表随着Eurka更新)。</p>
+<p>Hystrix断路器或者熔断器，Zuul实现api网关，SideCar实现异构开发语言支持。SpringCloud原生ConfigServer配置中心，Git作为分布式配置中心的数据存储的地方。</p>
+<p>我们项目中使用Eurka作为注册中心。而没有使用dubbo使用的zookeeper作为注册中心。</p>
+<a id="more"></a>
+
+<p>我们基于分布式系统设计的定理，CAP原则。C一致性，A可用性（可用性不等于可靠性），P分区容错性。基于分布式的系统必须实现P分区容错性，一般设计要么侧重AP,要么侧重CP。</p>
+<h3 id="Zookeeper和Eureka的区别？"><a href="#Zookeeper和Eureka的区别？" class="headerlink" title="Zookeeper和Eureka的区别？"></a>Zookeeper和Eureka的区别？</h3><ol>
+<li>Zookeeper侧重CP设计，强调一致性。Zookeeper结构是主从结构，有leader,其他节点都是follower。当在Zookeeper节点宕机个数超过一半时和zookeeper集群在选举时，zookeeper是不推荐使用的。</li>
+<li>Eureka侧重AP设计，强调可用性。Eurka结构点对点。每个节点互为主从，即是主节点，又是从节点。每个节点都会同步所有的数据。Eurka数据都在内存中，底层就是concurrentHashMap,防止高并发线程安全。多级缓存，4级。应对高并发。Eureka心跳机制，心跳从client端，每隔30s向服务端发起心跳请求，顺便检查数据是否变化。如果没有变化，等待下一个周期来发起心跳。如果服务列表变化，就从Eurka中同步列表。即使所有的节点都宕机，服务依然可用，client在发起端，它是EurkaClient，本地缓存之前路由，直接转向。</li>
+</ol>
+<h3 id="Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。"><a href="#Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。" class="headerlink" title="Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。"></a>Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。</h3><ol>
+<li>SpringCloud号称整合Feign之后完全兼容SpringMVC.实际不是完全兼容，差异很大<ol start="2">
+<li>@RequestMapping,@Get,@Post,Feign目前不支持</li>
+<li>@RequestMapping(“/aaa/bbb”)controller中可以分成两个段，但是Feign类上就不能写了</li>
+<li>简单参数，@PathVariable(“name”)必须写全，controller可以省略</li>
+<li>对象参数，controller直接支持对象参数，Feign不支持，@RequestBody以json接参，内部才能动态传入到对象中。</li>
+<li>时间bug+ObjectMapper(jackson没做可配置)，两个解决方案，feign接参字符串，拦截器单独写。</li>
+</ol>
+</li>
+</ol>
+<h3 id="Ribbon前端负载均衡"><a href="#Ribbon前端负载均衡" class="headerlink" title="Ribbon前端负载均衡"></a>Ribbon前端负载均衡</h3><ol>
+<li><p>nginx后端负载均衡，nginx按配置转向，它不能感知服务死活，直接转向，有可能超时。</p>
+</li>
+<li><p>ribbon有本地客户端，转向信息保存在本地缓存中，直接从这个缓存中选中路径，转向(没到服务端就选择路径-按轮询算法选择)。Ribbon能感知服务死活，因为它Eureka，Eureka是动态维护服务列表的。(Ribbon从Eurka更新，只要Eurka正常，不正常的服务就通过心跳被去掉，没有那个列表就不会导致导向错误甚至超时)</p>
+</li>
+</ol>
+<blockquote>
+<p>请求-》Zuul网关-》nginx-》ribbon</p>
+</blockquote>
+<h3 id="Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。"><a href="#Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。" class="headerlink" title="Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。"></a>Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。</h3><p>Hystrix三种状态:关闭，半开，打开。</p>
+<p>断路器在业务正常访问时，处于”关闭”状态，当业务访问失败时，超过预期值阀值，然后才切换打开状态。回调fallback断路器方法，这个方法返回默认值(预案)，返回json对象。不是一直失败，一直打开。当用户发现微服务异常，修复异常。微服务章程访问。它每次失败时先试试能否正常访问，一旦测试业务访问正常，会毫不犹豫地从半开状态切换到关闭状态。</p>
+<p>和Zuul整合后，必须按照Zuul方法去调用，实现接口。</p>
+<p>传统编程中以前没有这方面的内容，抛出异常。</p>
+<h3 id="Zuul-gataway-API网关，认证授权，类似shiro。转发类似nginx。"><a href="#Zuul-gataway-API网关，认证授权，类似shiro。转发类似nginx。" class="headerlink" title="Zuul gataway API网关，认证授权，类似shiro。转发类似nginx。"></a>Zuul gataway API网关，认证授权，类似shiro。转发类似nginx。</h3><ol>
+<li>所有用户的请求都必须通过它来中转。</li>
+<li>三条通路:服务提供者，服务消费者，Zuul。实际开发中部署，Zuul在外网暴露，提供者和消费者不暴露(内网)。</li>
+</ol>
+<p>消费者可以增强我们的程序，无需自己写.</p>
+<h4 id="SpringCloudConfig配置中心-轻量级-速度快"><a href="#SpringCloudConfig配置中心-轻量级-速度快" class="headerlink" title="SpringCloudConfig配置中心(轻量级,速度快)"></a>SpringCloudConfig配置中心(轻量级,速度快)</h4><ol>
+<li><p>替代本地属性文件解决方案，如果服务器个数非常多，100+。如果每台服务都去手动修改，在很长的时间内数据不一致。手动修改，会遗漏。配置中心就把单机的配置升级到分布式的环境中。每台机器都能访问配置中心。SpringCloudConfig是利用git存储，天然就是分布式。</p>
+</li>
+<li><p>ZooKeeper配置中心，它内部是小的树形结构，称为数据字典，字典很小。这个结构会在不同的节点，自动地同步，zookeeper主节点的数据从节点自动备份，所有节点数据互相联通。因为量小，zookeeper同步速度非常快。Hadoop的配置信息就是由Zookeeper来管理的。</p>
+</li>
+</ol>
+<h3 id="SpringCloud和dubbo比较"><a href="#SpringCloud和dubbo比较" class="headerlink" title="SpringCloud和dubbo比较"></a>SpringCloud和dubbo比较</h3><ol>
+<li>SpringCloud 内容繁多，形成SpringCloud全家桶，利用SpringBoot来构建程序更跨界。SpringCloud基于http协议,(纯文本)RESTFul+json(序列化json)返回</li>
+<li>2.Dubbo阿里开源，2003年在双11的产品，这个产品是经过极大实际使用的，而且在阿里运行6年。一开源，当当提升spring版本和rest支持dubbox.携程使用dubbo。Dubbo只是SOA的最佳实践，是微服务框架。底层基于TCP协议，RPC（基于二进制,谷歌的protobuf/thirft-性能更高的压缩二进制协议）方式-也叫二进制序列化(把对象转为可传输的东西)。</li>
+<li>性能上SpringCloud不如dubbo。而json天然异构。</li>
+<li>远期谷歌gRPC的要颠覆网络协议。谷歌先是默认https协议，现在要完全基于新的rpc方式。(Http协议不如RPC快)</li>
+<li>目前为止，dubbo宣称是SpingCloud的一个子集，专注于RPC的传输方式。</li>
+</ol>
+<h3 id="面向？"><a href="#面向？" class="headerlink" title="面向？"></a>面向？</h3><ol>
+<li>面向过程，日常搭建开发的代码都是面向过程的为了兼顾性能没有完全面向对象。mybais开发基于sql，面向过程。</li>
+<li>面向对象，开发中需求变更时能减少代码修改量，不能完全克服需求变更。</li>
+<li>面向函数，大数据的思考方式:面向对象+面向函数。jdk8也推出函数式编程。</li>
+<li>面向架构，SOA面向架构编程。SOA有一个重要概念:BUS总线，BUS最早想实现所有的按照标准的模业务模块式插入BUS总线中。如办公自动化和订单还有物流都可以接入总线。各个业务模块通过总线通信。梦想：一个大大的软件系统就OK。用友的u8,金蝶是中国财务软件底层构建了soa,但是自身性能不足。</li>
+<li>面向服务，微服务兴起，基于SOA概念，是SOA的降级。没有那么庞大。微服务是一个标准。它的标准是:Rest+JSON或RPC,springCloud选择前者(Rest+JSON+MQ),dubbo走了后者(基于RPC)</li>
+<li>Dubbo是SOA的最佳实践 </li>
+</ol>
+</div><div class="post-copyright"><blockquote><p>原文作者: 乘风 hexiii</p><p>原文链接: <a href="https://blog.cssmini.com/2020/03/18/SpringBoot、SpringCloud、dubbo、zookeeper之间的区别/">https://blog.cssmini.com/2020/03/18/SpringBoot、SpringCloud、dubbo、zookeeper之间的区别/</a></p><p>版权声明: 转载请注明出处(必须保留作者署名及链接)</p></blockquote></div><div class="tags"><a href="/cssmini_index/tags/Spring/">Spring</a><a href="/cssmini_index/tags/dubbo/">dubbo</a><a href="/cssmini_index/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a></div><div class="post-share"><div class="social-share"><span>分享到:</span></div></div><div class="post-nav"><a href="/cssmini_index/2020/03/18/%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8B%E7%AC%94%E8%AE%B0/" class="pre">微信登录流程笔记</a><a href="/cssmini_index/2020/03/18/%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E5%9F%8B%E7%82%B9/" class="next">什么是数据埋点</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zookeeper和Eureka的区别？"><span class="toc-text">Zookeeper和Eureka的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。"><span class="toc-text">Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ribbon前端负载均衡"><span class="toc-text">Ribbon前端负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。"><span class="toc-text">Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zuul-gataway-API网关，认证授权，类似shiro。转发类似nginx。"><span class="toc-text">Zuul gataway API网关，认证授权，类似shiro。转发类似nginx。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringCloudConfig配置中心-轻量级-速度快"><span class="toc-text">SpringCloudConfig配置中心(轻量级,速度快)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringCloud和dubbo比较"><span class="toc-text">SpringCloud和dubbo比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向？"><span class="toc-text">面向？</span></a></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/cssmini_index/archives/2020/">2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/cssmini_index/archives/2019/">2019</a><span class="archive-list-count">4</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2020/03/19/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8F%90%E7%A4%BA%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2%E6%9C%AA%E6%B3%A8%E5%86%8C/">微信支付提示当前页面未注册</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2020/03/18/%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95%E6%B5%81%E7%A8%8B%E7%AC%94%E8%AE%B0/">微信登录流程笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2020/03/18/SpringBoot%E3%80%81SpringCloud%E3%80%81dubbo%E3%80%81zookeeper%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2020/03/18/%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E5%9F%8B%E7%82%B9/">什么是数据埋点</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2020/03/18/HTML%E5%8A%A0%E5%AF%86%E6%B7%B7%E6%B7%86/">HTML加密混淆</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2020/03/18/%E8%AE%BE%E8%AE%A1%E5%9F%BA%E4%BA%8EHTML5%E7%9A%84APP%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD%E5%8F%8A%E5%AE%89%E5%85%A8%E8%B0%83%E7%94%A8%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%88%E5%8E%9F%E7%90%86%E7%AF%87%EF%BC%89/">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2020/03/18/Nginx%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Nginx 常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2020/03/18/windows%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%85%B3%E9%97%AD%E7%9B%B8%E5%BA%94%E7%9A%84%E8%BF%9B%E7%A8%8B/">windows查看端口占用以及关闭相应的进程</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2019/12/20/%E5%8F%8D%E7%88%AC%E8%99%AB%E7%9A%84%E6%9C%BA%E5%88%B6%E5%92%8C%E9%81%87%E5%88%B0%E5%8F%8D%E7%88%AC%E8%99%AB%E6%9C%BA%E5%88%B6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">反爬虫的机制和遇到反爬虫机制的解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/cssmini_index/2019/12/07/node.js%20npm%20webPack%20%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/">node.js npm webPack 之间的关系</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/cssmini_index/categories/%E5%BC%80%E5%8F%91/">开发</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/cssmini_index/categories/%E5%BC%80%E5%8F%91/uni-app/">uni-app</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/cssmini_index/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/">转载</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/uni-app/">uni-app</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/%E5%BC%80%E5%8F%91/">开发</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/cssmini_index/categories/%E8%BF%90%E7%BB%B4/">运维</a><span class="category-list-count">1</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/cssmini_index/tags/%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/" style="font-size: 15px;">端口占用</a> <a href="/cssmini_index/tags/%E6%91%98%E6%8A%84/" style="font-size: 15px;">摘抄</a> <a href="/cssmini_index/tags/HTML/" style="font-size: 15px;">HTML</a> <a href="/cssmini_index/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 15px;">加密</a> <a href="/cssmini_index/tags/%E5%AE%89%E5%85%A8/" style="font-size: 15px;">安全</a> <a href="/cssmini_index/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/cssmini_index/tags/windows/" style="font-size: 15px;">windows</a> <a href="/cssmini_index/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 15px;">笔记</a> <a href="/cssmini_index/tags/%E7%99%BB%E5%BD%95/" style="font-size: 15px;">登录</a> <a href="/cssmini_index/tags/%E6%95%B0%E6%8D%AE%E5%9F%8B%E7%82%B9/" style="font-size: 15px;">数据埋点</a> <a href="/cssmini_index/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/cssmini_index/tags/dubbo/" style="font-size: 15px;">dubbo</a> <a href="/cssmini_index/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15px;">分布式</a> <a href="/cssmini_index/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/" style="font-size: 15px;">微信支付</a></div></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/cssmini_index/baidusitemap.xml">网站地图</a> |  <a href="/cssmini_index/atom.xml">订阅本站</a> |  <a href="/cssmini_index/about/">联系博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/cssmini_index/." rel="nofollow">乘风 hexiii.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/cssmini_index/js/search.json.js?v=2.0.4"></script><script>(function() {
+  loadData();
+  function loadData() {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '/hitohoto.json', true);
+          xhr.onload = function() {
+              if (this.status >= 200 && this.status < 300) {
+                  var res = JSON.parse(this.response||this.responseText);
+                  var hitokotoData = res instanceof Array ? res : res.posts;
+                  success(hitokotoData);
+              } else {
+                  console.error(this.statusText);
+              }
+          };
+          xhr.onerror = function() {
+              console.error(this.statusText);
+          };
+          xhr.send();
+  }
+  function success(hitokotoData){
+      var hitokoto = document.getElementById('hitokoto');
+      var from = document.getElementById("from");
+      var index = Math.floor(Math.random() * hitokotoData.length);
+      hitokoto.innerHTML = hitokotoData[index].hitokoto;
+      from.innerHTML = '-- '+hitokotoData[index].from;
+  }
+})();</script><script type="text/javascript" src="/cssmini_index/js/toctotop.js?v=2.0.4" async></script><link rel="stylesheet" type="text/css" href="/cssmini_index/share/css/share.css"><script type="text/javascript" src="/cssmini_index/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/cssmini_index/share/js/qrcode.js" charset="utf-8"></script></body></html>
