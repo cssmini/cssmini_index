@@ -1,7 +1,3 @@
----
-layout: false
----
-
 # cssmini's blog
 
 #### 介绍
