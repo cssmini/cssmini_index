@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.cssmini.com/about/index.html</loc>
+    
+    <lastmod>2020-04-29T06:58:52.870Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.cssmini.com/movies/index.html</loc>
+    
+    <lastmod>2020-04-28T03:17:12.597Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.cssmini.com/books/index.html</loc>
+    
+    <lastmod>2020-04-28T03:17:04.128Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.cssmini.com/categories/index.html</loc>
+    
+    <lastmod>2020-04-27T08:16:25.524Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.cssmini.com/tags/index.html</loc>
+    
+    <lastmod>2020-04-27T08:15:56.730Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.cssmini.com/archives/23552.html</loc>
     
     <lastmod>2020-04-10T03:04:36.634Z</lastmod>
@@ -103,13 +138,6 @@
     <loc>https://blog.cssmini.com/hitohoto.json</loc>
     
     <lastmod>2020-03-31T09:46:10.384Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.cssmini.com/about/index.html</loc>
-    
-    <lastmod>2019-11-28T01:49:24.428Z</lastmod>
     
   </url>
   
