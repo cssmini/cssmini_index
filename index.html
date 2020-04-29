@@ -711,20 +711,24 @@ Hystrix断路器或者熔断器，Zuul实现api网关，SideCar实现异构开�
 </p>
 
 
-            <p>
-                
-                    <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-                    
-                        <span><a id="jinrishici-sentence" href="https://www.jinrishici.com/" target="_blank" rel="noopener"></a></span>
-            </p>
+        <p>
+            
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i
+                        class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a id="jinrishici-sentence" href="https://www.jinrishici.com/" target="_blank" rel="noopener"></a></span>
+        </p>
     </div>
     <div class="bottom">
-        <p><span>乘风 hexiii &copy; 2018 - 2020</span>
+        <p><span>乘风 hexiii &copy;
+                2018 -
+                2020</span>
             <span>
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a
+                    href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
             </span>
-            <br/>
+            <br />
             <span id="spanSitetime"></span>
         </p>
     </div>
@@ -784,8 +788,8 @@ Hystrix断路器或者熔断器，Zuul实现api网关，SideCar实现异构开�
 <script>
     var BLOG = {
         ROOT: '/',
-        SHARE: true,
-        REWARD: false
+        SHARE: ,
+        REWARD: 
     };
 
     
@@ -793,7 +797,7 @@ Hystrix断路器或者熔断器，Zuul实现api网关，SideCar实现异构开�
 
 <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
-    
+
 <div class="search-panel" id="search-panel">
     <ul class="search-result" id="search-result"></ul>
 </div>
@@ -811,66 +815,66 @@ Hystrix断路器或者熔断器，Zuul实现api网关，SideCar实现异构开�
 </li>
 </template>
 
-        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-        
-
-            
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
-                
-                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-                    
-                        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-                        <script src="/js/userScript.js" charset="utf-8"></script>
-                        <script>
-                            // 站点运行时间统计
-                            siteTime();
-                            // 站点运行时间统计
-                            function siteTime() {
-                                window.setTimeout("siteTime()", 1000);
-                                var startDate = '2019-04-02';
-                                var dataArr = startDate.split('-');
-                                var seconds = 1000;
-                                var minutes = seconds * 60;
-                                var hours = minutes * 60;
-                                var days = hours * 24;
-                                var years = days * 365;
-                                var today = new Date();
-                                var todayYear = today.getFullYear();
-                                var todayMonth = today.getMonth() + 1;
-                                var todayDate = today.getDate();
-                                var todayHour = today.getHours();
-                                var todayMinute = today.getMinutes();
-                                var todaySecond = today.getSeconds();
 
-                                /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
-                                year - 作为date对象的年份，为4位年份值
-                                month - 0-11之间的整数，做为date对象的月份
-                                day - 1-31之间的整数，做为date对象的天数
-                                hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
-                                minutes - 0-59之间的整数，做为date对象的分钟数
-                                seconds - 0-59之间的整数，做为date对象的秒数
-                                microseconds - 0-999之间的整数，做为date对象的毫秒数 */
 
-                                var t1 = Date.UTC(dataArr[0], dataArr[1], dataArr[2], 00, 00, 00); //北京时间2016-12-1 00:00:00
-                                var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                                var diff = t2 - t1;
 
-                                //var diffYears = Math.floor(diff / years);
-                                //var diffDays = Math.floor((diff / days) - diffYears * 365);
-                                //var diffDays = Math.floor((diff / days));
-                                //var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                                //var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
-                                //var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
 
-                                var diffDays = Math.floor((diff / days));
-                                var diffHours = Math.floor((diff - diffDays * days) / hours);
-                                var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
-                                var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours - diffMinutes * minutes) / seconds);
-                                document.getElementById("spanSitetime").innerHTML = "勉强维持运行 " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒 ";
-                            }
-                        </script>
-                        
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script src="/js/userScript.js" charset="utf-8"></script>
+<script>
+        // 站点运行时间统计
+        siteTime();
+    // 站点运行时间统计
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var startDate = '2019-04-02';
+        var dataArr = startDate.split('-');
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+
+        var t1 = Date.UTC(dataArr[0], dataArr[1], dataArr[2], 00, 00, 00); //北京时间2016-12-1 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+
+        //var diffYears = Math.floor(diff / years);
+        //var diffDays = Math.floor((diff / days) - diffYears * 365);
+        //var diffDays = Math.floor((diff / days));
+        //var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        //var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        //var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+
+        var diffDays = Math.floor((diff / days));
+        var diffHours = Math.floor((diff - diffDays * days) / hours);
+        var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("spanSitetime").innerHTML = "勉强维持运行 " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒 ";
+    }
+</script>
+
 <script>
 (function() {
     var OriginTitile = document.title, titleTime;
