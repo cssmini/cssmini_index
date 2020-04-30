@@ -139,35 +139,30 @@
         <header class="top-header" id="header">
     <div class="flex-row">
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-            <i class="icon icon-lg icon-navicon"></i>
+          <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">
-            SpringBoot、SpringCloud、dubbo、zookeeper之间的区别
+        <div class="flex-col header-title ellipsis">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
         </div>
         
-            <div class="search-wrap" id="search-wrap">
-                <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                    <i class="icon icon-lg icon-chevron-left"></i>
-                </a>
-                <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-                <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                    <i class="icon icon-lg icon-search"></i>
-                </a>
-            </div>
-            
-                
-                    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-                        <i class="icon icon-lg icon-share-alt"></i>
-                    </a>
-                    
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
     </div>
 </header>
 <header class="content-header post-header">
-
     <div class="container fade-scale">
-        <h1 class="title">
-            SpringBoot、SpringCloud、dubbo、zookeeper之间的区别
-        </h1>
+        <h1 class="title">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</h1>
         <h5 class="subtitle">
             
                 <time datetime="2020-03-18T03:54:00.000Z" itemprop="datePublished" class="page-time">
@@ -177,14 +172,11 @@
 
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AC%E8%BD%BD/">转载</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%BD%AC%E8%BD%BD/%E5%BC%80%E5%8F%91/">开发</a></li></ul></li></ul>
 
-                    
+            
         </h5>
         
-
     </div>
-
     
-
 
 </header>
 
@@ -405,35 +397,35 @@ SpringBoot..." data-title=" QQ">
 
 
 
-
-
-
-
-
-
-<section class="comments" id="comments">
-    <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
     <script>
-        var id = location.pathname
-        if (location.pathname.length > 50) {
-          id = location.pathname.replace(/\/\d+\/\d+\/\d+\//, '').replace('/', '').substring(0, 50)
-        }
-        const gitalk = new Gitalk({
-          clientID: 'fb8c6cd0decb1b00bcb7',
-          clientSecret: 'ae80f1b115b6d72532273015de7ea7f863942610',
-          repo: 'https://github.com/cssmini/cssmini.github.io.git',
-          owner: 'cssmini',
-          admin: ['cssmini'],
-          id: id,      // Ensure uniqueness and length less than 50
-          title: document.title.split('|')[0],
-          distractionFreeMode: false  // Facebook-like distraction free mode
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "WKgyrUxHoWUR11uXCynQDB1W-gzGzoHsz",
+            appKey: "mfEzPtkXGazEO6Q6jxLb2hb8",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
         })
-
-        gitalk.render('gitalk-container')
     </script>
-</section>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
 
 
 
@@ -457,24 +449,20 @@ SpringBoot..." data-title=" QQ">
 </p>
 
 
-        <p>
-            
-            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i
-                        class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span><a id="jinrishici-sentence" href="https://www.jinrishici.com/" target="_blank" rel="noopener"></a></span>
-        </p>
+            <p>
+                
+                    <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+                    
+                        <span><a id="jinrishici-sentence" href="https://www.jinrishici.com/" target="_blank" rel="noopener"></a></span>
+            </p>
     </div>
     <div class="bottom">
-        <p><span>乘风 hexiii &copy;
-                2018 -
-                2020</span>
+        <p><span>乘风 hexiii &copy; 2018 - 2020</span>
             <span>
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a
-                    href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
             </span>
-            <br />
+            <br/>
             <span id="spanSitetime"></span>
         </p>
     </div>
@@ -535,13 +523,9 @@ SpringBoot..." data-title=" QQ">
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-    var BLOG = {
-        ROOT: '/',
-        SHARE: ,
-        REWARD: 
-    };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
-    
+
 </script>
 
 <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
@@ -572,6 +556,8 @@ SpringBoot..." data-title=" QQ">
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
 
 <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 <script src="/js/userScript.js" charset="utf-8"></script>
