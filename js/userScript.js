@@ -30,7 +30,7 @@
         }
         if (document.getElementsByClassName('hitokoto_from').length > 0) {
             var hitokoto_from = document.getElementsByClassName('hitokoto_from')[0];
-            hitokoto_from.innerHTML = '--&ensp;' + hitokotoData[index].from;
+            hitokoto_from.innerHTML = '——&ensp;' + hitokotoData[index].from;
         }
     }
 })();
