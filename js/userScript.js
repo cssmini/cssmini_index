@@ -26,6 +26,7 @@
         if (document.getElementsByClassName('hitokoto_text').length > 0) {
             var hitokoto_text = document.getElementsByClassName('hitokoto_text')[0];
             hitokoto_text.innerHTML = hitokotoData[index].hitokoto;
+            hitokoto_text.onclick = loadData;
         }
         if (document.getElementsByClassName('hitokoto_from').length > 0) {
             var hitokoto_from = document.getElementsByClassName('hitokoto_from')[0];
