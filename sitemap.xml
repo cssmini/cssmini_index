@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.cssmini.com/hitohoto.json</loc>
+    
+    <lastmod>2020-05-06T03:10:58.636Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.cssmini.com/about/index.html</loc>
     
     <lastmod>2020-04-29T07:24:15.883Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>https://blog.cssmini.com/archives/16107.html</loc>
     
     <lastmod>2020-04-10T03:04:36.570Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.cssmini.com/hitohoto.json</loc>
-    
-    <lastmod>2020-03-31T09:46:10.384Z</lastmod>
     
   </url>
   
