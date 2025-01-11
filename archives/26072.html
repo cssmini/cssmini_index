@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?ef375efd6107ecef8726548f2cfae9d0"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>支付流程业务逻辑 | 随风而逝 | 秋风清，秋月明.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="支付,微信">
+    <meta name="description" content="Start 用户点击欠款支付进入欠款支付页面。 1.1 欠款支付页面初始化，请求服务器获取欠款信息。 1.2 有欠款信息则可继续下一步，否则提示【未查询到欠款信息】。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支付流程业务逻辑">
+<meta property="og:url" content="https://cssmini.github.io/cssmini_index/archives/26072.html">
+<meta property="og:site_name" content="随风而逝">
+<meta property="og:description" content="Start 用户点击欠款支付进入欠款支付页面。 1.1 欠款支付页面初始化，请求服务器获取欠款信息。 1.2 有欠款信息则可继续下一步，否则提示【未查询到欠款信息】。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-30T01:50:02.000Z">
+<meta property="article:modified_time" content="2025-01-11T20:34:33.126Z">
+<meta property="article:author" content="乘风 hexiii">
+<meta property="article:tag" content="支付">
+<meta property="article:tag" content="微信">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="随风而逝" href="/cssmini_index/atom.xml">
+    
+    <link rel="shortcut icon" href="/cssmini_index/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/cssmini_index/img/brand.jpg)">
+      <div class="brand">
+        <a href="/cssmini_index/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/cssmini_index/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">乘风 hexiii</h5>
+          <a href="mailto:cssmini@foxmail.com" title="cssmini@foxmail.com" class="mail">cssmini@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/cssmini_index/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/books"  >
+                <i class="icon icon-lg icon-bookmark"></i>
+                Books
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/movies"  >
+                <i class="icon icon-lg icon-film"></i>
+                Movies
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cssmini" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/about"  >
+                <i class="icon icon-lg icon-quote-right"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">支付流程业务逻辑</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">支付流程业务逻辑</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-30T01:50:02.000Z" itemprop="datePublished" class="page-time">
+  2020-03-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/">微信支付</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91/">业务逻辑</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Start"><span class="post-toc-number">1.</span> <span class="post-toc-text">Start</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户支付完成后，后端进行的操作："><span class="post-toc-number">2.</span> <span class="post-toc-text">用户支付完成后，后端进行的操作：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#订单状态："><span class="post-toc-number">3.</span> <span class="post-toc-text">订单状态：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#两个定时器："><span class="post-toc-number">4.</span> <span class="post-toc-text">两个定时器：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Tips"><span class="post-toc-number">5.</span> <span class="post-toc-text">Tips:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#以上业务逻辑的接口列表"><span class="post-toc-number">6.</span> <span class="post-toc-text">以上业务逻辑的接口列表</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-支付流程业务逻辑"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">支付流程业务逻辑</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-30 09:50:02" datetime="2020-03-30T01:50:02.000Z"  itemprop="datePublished">2020-03-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/">微信支付</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91/">业务逻辑</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h3><ol>
+<li><p>用户点击欠款支付进入欠款支付页面。</p>
+<p>1.1 欠款支付页面初始化，请求服务器获取欠款信息。</p>
+<p>1.2 有欠款信息则可继续下一步，否则提示【未查询到欠款信息】。</p>
+</li>
+</ol>
+<a id="more"></a>
+<ol start="2">
+<li>用户点击欠款支付按钮，前端请求服务器生成【业务系统订单】发起微信支付。</li>
+</ol>
+<p>​    2.1 判断是否存在【已支付】，但未及时更改订单状态为【已完结】的订单。</p>
+<p>​    2.2 生成业务系统订单，调用微信接口生成支付参数，返回给页面。</p>
+<p>​    2.3 页面拉起支付，等待用户输入密码完成支付。</p>
+<ol start="3">
+<li>用户支付完成</li>
+</ol>
+<p>​    3.1 页面进行轮询操作，查询订单状态。十秒后订单仍然未变更为【已完结】状态，则停止轮询，提示用户：订单状态同步稍有延时，请稍后再来查看。</p>
+<p>4.支付流程完毕</p>
+<h3 id="用户支付完成后，后端进行的操作："><a href="#用户支付完成后，后端进行的操作：" class="headerlink" title="用户支付完成后，后端进行的操作："></a>用户支付完成后，后端进行的操作：</h3><ol>
+<li><p>等待回调</p>
+<p> 1.1 收到回调后修改订单状态为【已支付】</p>
+<p> 1.2 并调用接口同步一条欠款支付的财经信息给业务系统。</p>
+</li>
+</ol>
+<ol start="2">
+<li>两个定时器，定时执行操作。</li>
+</ol>
+<h3 id="订单状态："><a href="#订单状态：" class="headerlink" title="订单状态："></a>订单状态：</h3><p><strong>待支付：</strong>订单已经生成，等待用户支付。</p>
+<p><strong>已支付：</strong>（订单已经支付），通过【回调】进行修改或定时任务调用【微信查单】接口，确认用户是否支付，微信支付已经完成，修改为此状态。</p>
+<p><strong>已完结：</strong>微信支付已经完成，业务系统已更新欠款信息，修改为此状态。</p>
+<p><strong>已超时：</strong>设置一个待支付订单超时时间，判断处于待支付状态的订单，是否超过【待支付超时时间】，超时修改为此状态。</p>
+<p><strong>已退款：</strong>通过定时器轮询，将已支付，但超过一定时间，始终没能更改订单状态为【已完结】的订单，进行自动退款操作，同时更改订单状态为已退款。</p>
+<p>（考虑可以不用退款，而是重新发起更新业务系统欠款支付信息的操作，同步业务系统订单，更新成功后修改订单状态为已完结）</p>
+<h3 id="两个定时器："><a href="#两个定时器：" class="headerlink" title="两个定时器："></a>两个定时器：</h3><ol>
+<li><p>未支付订单，调用微信查单接口同步是否已支付。修改超时未支付的订单，改为已超时状态。</p>
+</li>
+<li><p>已支付订单，但超过一定时间后仍未修改为【已完结】状态的订单，再次尝试同步订单信息为【已完结】，或者进行退款操作。</p>
+</li>
+</ol>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</h3><p>读者可能重复支付的问题：通过判断订单状态，如果处于已支付状态，提示：用户等待系统同步欠款支付信息，请勿重复操作。</p>
+<p>回调 + 微信查单定时器可以保证订单及时更改支付状态。</p>
+<h3 id="以上业务逻辑的接口列表"><a href="#以上业务逻辑的接口列表" class="headerlink" title="以上业务逻辑的接口列表"></a>以上业务逻辑的接口列表</h3><p>1.获取欠款信息<br>入参：读者id，馆代码</p>
+<p>2.生成一条欠款待支付订单<br>入参：读者id，馆代码，微信发起支付返回的相关参数，</p>
+<p>3.修改订单状态 （已支付、已完结、已超时）<br>入参：读者id，馆代码</p>
+<p>3.1 修改订单为已支付<br>3.2 修改订单为已完结 （用户欠款数归零）<br>3.3 修改订单为已超时</p>
+<p>4.获取欠款支付订单信息<br>入参：订单 id</p>
+<p>5.获取所有已支付订单（所有馆，返回map，key为馆代码，value为List&lt;已支付订单&gt;）</p>
+<p>6.获取所有待支付订单（所有馆，返回map，key为馆代码，value为List&lt;待支付订单&gt;）</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2025-01-11T20:34:33.126Z" itemprop="dateUpdated">2025-01-12 04:34:33</time>
+</span><br>
+
+
+        
+        <a href="/cssmini_index/archives/26072.html" target="_blank" rel="external">https://cssmini.github.io/cssmini_index/archives/26072.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://cssmini.github.io/cssmini_index">
+            <img src="/cssmini_index/img/avatar.jpg" alt="乘风 hexiii">
+            乘风 hexiii
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/%E5%BE%AE%E4%BF%A1/" rel="tag">微信</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/%E6%94%AF%E4%BB%98/" rel="tag">支付</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cssmini.github.io/cssmini_index/archives/26072.html&title=《支付流程业务逻辑》 — 随风而逝&pic=https://cssmini.github.io/cssmini_index/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cssmini.github.io/cssmini_index/archives/26072.html&title=《支付流程业务逻辑》 — 随风而逝&source=Start
+用户点击欠款支付进入欠款支付页面。
+1.1 欠款支付页面初始化，请求服务器获取欠款信息。
+1.2 有欠款信息则可继续下一步，否则提示【未查询到..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cssmini.github.io/cssmini_index/archives/26072.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《支付流程业务逻辑》 — 随风而逝&url=https://cssmini.github.io/cssmini_index/archives/26072.html&via=https://cssmini.github.io/cssmini_index" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cssmini.github.io/cssmini_index/archives/26072.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/cssmini_index/archives/27395.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">微信支付提示当前页面未注册</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "WKgyrUxHoWUR11uXCynQDB1W-gzGzoHsz",
+            appKey: "mfEzPtkXGazEO6Q6jxLb2hb8",
+            avatar: "mm",
+            placeholder: "留下你的足迹...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span><a href="/cssmini_index/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+                    
+                        <span><a id="jinrishici-sentence" href="https://www.jinrishici.com/" target="_blank" rel="noopener"></a></span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p><span>乘风 hexiii &copy; 2018 - 2025</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+            <br/>
+            <span id="spanSitetime"></span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cssmini.github.io/cssmini_index/archives/26072.html&title=《支付流程业务逻辑》 — 随风而逝&pic=https://cssmini.github.io/cssmini_index/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cssmini.github.io/cssmini_index/archives/26072.html&title=《支付流程业务逻辑》 — 随风而逝&source=Start
+用户点击欠款支付进入欠款支付页面。
+1.1 欠款支付页面初始化，请求服务器获取欠款信息。
+1.2 有欠款信息则可继续下一步，否则提示【未查询到..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cssmini.github.io/cssmini_index/archives/26072.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《支付流程业务逻辑》 — 随风而逝&url=https://cssmini.github.io/cssmini_index/archives/26072.html&via=https://cssmini.github.io/cssmini_index" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cssmini.github.io/cssmini_index/archives/26072.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://cssmini.github.io/cssmini_index/archives/26072.html" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/cssmini_index/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script src="/js/userScript.js" charset="utf-8"></script>
+<script>
+        // 站点运行时间统计
+        siteTime();
+    // 站点运行时间统计
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var startDate = '2019-04-02';
+        var dataArr = startDate.split('-');
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+
+        var t1 = Date.UTC(dataArr[0], dataArr[1], dataArr[2], 00, 00, 00); //北京时间2016-12-1 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+
+        //var diffYears = Math.floor(diff / years);
+        //var diffDays = Math.floor((diff / days) - diffYears * 365);
+        //var diffDays = Math.floor((diff / days));
+        //var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        //var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        //var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+
+        var diffDays = Math.floor((diff / days));
+        var diffHours = Math.floor((diff - diffDays * days) / hours);
+        var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("spanSitetime").innerHTML = "勉强维持运行 " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒 ";
+    }
+</script>
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网站崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?ef375efd6107ecef8726548f2cfae9d0"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>HTML加密混淆 | 随风而逝 | 秋风清，秋月明.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="HTML,加密,安全">
+    <meta name="description" content="转载 关于HTML、js加密、混淆、源码保护、代码安全，防止解压直接看源码   一直有人问HTML加密混淆怎么做，其实这在业内是早已很多人研究过的课题。假日期间整理一篇文章分享给大家。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML加密混淆">
+<meta property="og:url" content="https://cssmini.github.io/cssmini_index/archives/19273.html">
+<meta property="og:site_name" content="随风而逝">
+<meta property="og:description" content="转载 关于HTML、js加密、混淆、源码保护、代码安全，防止解压直接看源码   一直有人问HTML加密混淆怎么做，其实这在业内是早已很多人研究过的课题。假日期间整理一篇文章分享给大家。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-18T03:40:54.000Z">
+<meta property="article:modified_time" content="2025-01-11T20:34:33.124Z">
+<meta property="article:author" content="乘风 hexiii">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="加密">
+<meta property="article:tag" content="安全">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="随风而逝" href="/cssmini_index/atom.xml">
+    
+    <link rel="shortcut icon" href="/cssmini_index/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/cssmini_index/img/brand.jpg)">
+      <div class="brand">
+        <a href="/cssmini_index/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/cssmini_index/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">乘风 hexiii</h5>
+          <a href="mailto:cssmini@foxmail.com" title="cssmini@foxmail.com" class="mail">cssmini@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/cssmini_index/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/books"  >
+                <i class="icon icon-lg icon-bookmark"></i>
+                Books
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/movies"  >
+                <i class="icon icon-lg icon-film"></i>
+                Movies
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cssmini" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/about"  >
+                <i class="icon icon-lg icon-quote-right"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">HTML加密混淆</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">HTML加密混淆</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-18T03:40:54.000Z" itemprop="datePublished" class="page-time">
+  2020-03-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/">转载</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#我们先理下需求，加密的目的是什么？加密到什么级别？为此我们可以牺牲什么？"><span class="post-toc-number">1.</span> <span class="post-toc-text">我们先理下需求，加密的目的是什么？加密到什么级别？为此我们可以牺牲什么？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接下来具体分析几种手段。"><span class="post-toc-number">2.</span> <span class="post-toc-text">接下来具体分析几种手段。</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#不要在前端放敏感数据"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">不要在前端放敏感数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#js、css压缩"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">js、css压缩</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTML、js、css混淆"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">HTML、js、css混淆</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#防止webkit-remote-debug，即防止浏览器控制台调试"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">防止webkit remote debug，即防止浏览器控制台调试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HBuilder提供的原生js混淆"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">HBuilder提供的原生js混淆</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-HTML加密混淆"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">HTML加密混淆</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-18 11:40:54" datetime="2020-03-18T03:40:54.000Z"  itemprop="datePublished">2020-03-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/">转载</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="https://ask.dcloud.net.cn/article/249" target="_blank" rel="noopener">转载 关于HTML、js加密、混淆、源码保护、代码安全，防止解压直接看源码</a></p>
+<blockquote>
+<p> 一直有人问HTML加密混淆怎么做，其实这在业内是早已很多人研究过的课题。<br>假日期间整理一篇文章分享给大家。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="我们先理下需求，加密的目的是什么？加密到什么级别？为此我们可以牺牲什么？"><a href="#我们先理下需求，加密的目的是什么？加密到什么级别？为此我们可以牺牲什么？" class="headerlink" title="我们先理下需求，加密的目的是什么？加密到什么级别？为此我们可以牺牲什么？"></a>我们先理下需求，加密的目的是什么？加密到什么级别？为此我们可以牺牲什么？</h2><p>我们知道这个世界不存在绝对的安全，加密会被破解、混淆会被反混淆。<br>技术小白、开发者、黑客，是完全不同的级别，防范不同级别的人策略都不一样。<br>防范力度越大，投入代价也越大，比如聘请专业的安全公司。<br>除了投入，我们还需要考虑程序的执行性能和用户体验。<br>加密的代码在运行时必须解密，混淆后尤其是混淆HTML后，程序的执行性能会下降。<br>是否真的有必要做这类的源码保护，还需要谨慎取舍。</p>
+<p>一般而言，前端的代码，负责的是用户体验，后端的代码，负责更安全的数据处理。<br>前端不要涉及泄漏太多涉密信息，那么加密的意义不是特别大。<br>我很少在前端代码里看到值得保护的内容，比如高深的算法，很多代码是没必要牺牲用户体验来保护的。<br>但有些前端代码涉及最终用户的数据安全，此时还是要努力做数据保护的。</p>
+<h2 id="接下来具体分析几种手段。"><a href="#接下来具体分析几种手段。" class="headerlink" title="接下来具体分析几种手段。"></a>接下来具体分析几种手段。</h2><h3 id="不要在前端放敏感数据"><a href="#不要在前端放敏感数据" class="headerlink" title="不要在前端放敏感数据"></a>不要在前端放敏感数据</h3><p>这个听起来是废话，但真的很重要。<br>有些开发者在手机端明文存用户的密码，这是非常危险的事情。<br>即使是原生开发，一旦手机被root，也会造成数据泄漏。更何况HTML5开发。<br>比较好的做法是手机端存token，而不是密码，这里有篇文章专门介绍这块，涉及做登录的开发者推荐仔细看看<a href="https://ask.dcloud.net.cn/article/157" target="_blank" rel="noopener">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</a></p>
+<h3 id="js、css压缩"><a href="#js、css压缩" class="headerlink" title="js、css压缩"></a>js、css压缩</h3><p>压缩不是加密，也不是混淆。但压缩后的js文件，往往也具有混淆的功能。<br>js、css压缩是很常见的技术，我们经常看到各种框架的文件名是xxx.min.js，xxx.min.css。<br>使用合适的js、css压缩方案，可以减少文件体积、提高载入速度，最重要的是，它还能加快程序的执行性能。简直是有百利而无一害。<br>压缩js比较常用的工具是yahoo的YUI混淆，在HBuilder里点菜单工具-插件安装，里面有YUI compress，可以压缩js和css。<br>如果js、css比较大，发布前压缩下是比较推荐的做法。</p>
+<h3 id="HTML、js、css混淆"><a href="#HTML、js、css混淆" class="headerlink" title="HTML、js、css混淆"></a>HTML、js、css混淆</h3><p>压缩虽然也能混淆，但不是以让别人看不懂为目的，混淆是真正以别人看不懂为目的。<br>但是这样的混淆就不像压缩那么有百利而无一害了，它会降低程序执行性能。<br>一些开发者不希望发行包解压后可以直接看到源码，那么此时可以使用混淆方案。</p>
+<p>网上搜索HTML混淆，资料和工具都非常多。<br>原理都是类似的，js代码变成乱七八糟的字符串，然后用eval执行，HTML代码变乱七八糟字符串，用document.write或innerHTML执行，css也可以动态的在document.write里写 <code>&lt;style&gt;</code>。<br>这些工具有免费也有商业的，一般越商业的越难被反混淆。</p>
+<p>这个是免费的在线混淆工具 <a href="http://www.myobfuscate.com" target="_blank" rel="noopener">http://www.myobfuscate.com</a><br>这个是比较知名的商业工具，<a href="http://www.jasob.com" target="_blank" rel="noopener">http://www.jasob.com</a><br>其实大家也可以根据原理自己写混淆算法。</p>
+<p>混淆也是一个有年头的成熟技术，比如Google在保护gmail的前端代码时，也是通过混淆来保护的。<br>不管是压缩还是混淆，使用grunt来做发布是不错的方式，开发后一键调用grunt处理，非常便捷。</p>
+<p>HBuilder在原生层面支持js混淆，性能高于前端混淆。详情下面第6点。 这篇文章对于前端的代码保护也讲的非常专业，值得大家学习<a href="http://div.io/topic/1220" target="_blank" rel="noopener">http://div.io/topic/1220</a></p>
+<h3 id="防止webkit-remote-debug，即防止浏览器控制台调试"><a href="#防止webkit-remote-debug，即防止浏览器控制台调试" class="headerlink" title="防止webkit remote debug，即防止浏览器控制台调试"></a>防止webkit remote debug，即防止浏览器控制台调试</h3><p>Android4.4及以上和iOS是支持webkit remote debug的，在HBuilder的教程里也有如何使用chrome调试Android应用，和使用safari调试iOS应用的教程。<br>在HBuilder开发的App里，manifest.json里下的plus-distribute下有一个debug标签，标记为false后打包（可视化界面里也有配置），这样的包运行在手机上时webview会阻止浏览器的远程调试请求。</p>
+<p>如果你想调试，那么把debug改为true后再打包。<br>当然有些Android rom不是很规范，并不能阻止调试，这属于rom的bug。</p>
+<p>另外注意只有打包才能防调试，真机运行是不能阻止调试的。<br>专业加密加固加壳服务</p>
+<p>由于Android的特殊性，针对apk出现了加固、加壳产业，这也是业内常见的apk保护方案。<br>很多应用市场都提供加固服务，比如360手机助手的加固。<br>还有一批专业公司如爱加密，里面有免费的基础安全保障服务，也有收费的高级安全保障服务。<br>这里还有一个防止apk解压的小技巧：<a href="http://www.52pojie.cn/thread-287242-1-1.html" target="_blank" rel="noopener">http://www.52pojie.cn/thread-287242-1-1.html</a></p>
+<h3 id="HBuilder提供的原生js混淆"><a href="#HBuilder提供的原生js混淆" class="headerlink" title="HBuilder提供的原生js混淆"></a>HBuilder提供的原生js混淆</h3><p>在HBuilder或HBuilderX中，官方提供了原生层面的js混淆。<br>这种混淆的性能比纯前端混淆的性能要更好，反编译的难度也更大。但有些限制和使用注意：<br>Android4以下的手机不能运行加密后的js。<br>5+App下，iOS若配置wkWebview，则不能运行加密后的js。<br>具体使用方式是在打包界面，可以选择需要加密的js文件，然后打包即可。如下图：</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2025-01-11T20:34:33.124Z" itemprop="dateUpdated">2025-01-12 04:34:33</time>
+</span><br>
+
+
+        
+        <a href="/cssmini_index/archives/19273.html" target="_blank" rel="external">https://cssmini.github.io/cssmini_index/archives/19273.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://cssmini.github.io/cssmini_index">
+            <img src="/cssmini_index/img/avatar.jpg" alt="乘风 hexiii">
+            乘风 hexiii
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/%E5%8A%A0%E5%AF%86/" rel="tag">加密</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cssmini.github.io/cssmini_index/archives/19273.html&title=《HTML加密混淆》 — 随风而逝&pic=https://cssmini.github.io/cssmini_index/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cssmini.github.io/cssmini_index/archives/19273.html&title=《HTML加密混淆》 — 随风而逝&source=转载 关于HTML、js加密、混淆、源码保护、代码安全，防止解压直接看源码
+
+ 一直有人问HTML加密混淆怎么做，其实这在业内是早已很多人研究过的课题。假..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cssmini.github.io/cssmini_index/archives/19273.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTML加密混淆》 — 随风而逝&url=https://cssmini.github.io/cssmini_index/archives/19273.html&via=https://cssmini.github.io/cssmini_index" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cssmini.github.io/cssmini_index/archives/19273.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/cssmini_index/archives/23552.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">什么是数据埋点</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/cssmini_index/archives/12383.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "WKgyrUxHoWUR11uXCynQDB1W-gzGzoHsz",
+            appKey: "mfEzPtkXGazEO6Q6jxLb2hb8",
+            avatar: "mm",
+            placeholder: "留下你的足迹...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span><a href="/cssmini_index/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+                    
+                        <span><a id="jinrishici-sentence" href="https://www.jinrishici.com/" target="_blank" rel="noopener"></a></span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p><span>乘风 hexiii &copy; 2018 - 2025</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+            <br/>
+            <span id="spanSitetime"></span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cssmini.github.io/cssmini_index/archives/19273.html&title=《HTML加密混淆》 — 随风而逝&pic=https://cssmini.github.io/cssmini_index/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cssmini.github.io/cssmini_index/archives/19273.html&title=《HTML加密混淆》 — 随风而逝&source=转载 关于HTML、js加密、混淆、源码保护、代码安全，防止解压直接看源码
+
+ 一直有人问HTML加密混淆怎么做，其实这在业内是早已很多人研究过的课题。假..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cssmini.github.io/cssmini_index/archives/19273.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTML加密混淆》 — 随风而逝&url=https://cssmini.github.io/cssmini_index/archives/19273.html&via=https://cssmini.github.io/cssmini_index" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cssmini.github.io/cssmini_index/archives/19273.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://cssmini.github.io/cssmini_index/archives/19273.html" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/cssmini_index/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script src="/js/userScript.js" charset="utf-8"></script>
+<script>
+        // 站点运行时间统计
+        siteTime();
+    // 站点运行时间统计
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var startDate = '2019-04-02';
+        var dataArr = startDate.split('-');
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+
+        var t1 = Date.UTC(dataArr[0], dataArr[1], dataArr[2], 00, 00, 00); //北京时间2016-12-1 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+
+        //var diffYears = Math.floor(diff / years);
+        //var diffDays = Math.floor((diff / days) - diffYears * 365);
+        //var diffDays = Math.floor((diff / days));
+        //var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        //var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        //var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+
+        var diffDays = Math.floor((diff / days));
+        var diffHours = Math.floor((diff - diffDays * days) / hours);
+        var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("spanSitetime").innerHTML = "勉强维持运行 " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒 ";
+    }
+</script>
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网站崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

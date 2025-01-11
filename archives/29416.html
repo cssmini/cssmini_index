@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?ef375efd6107ecef8726548f2cfae9d0"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>SpringBoot、SpringCloud、dubbo、zookeeper之间的区别 | 随风而逝 | 秋风清，秋月明.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Spring,dubbo,分布式">
+    <meta name="description" content="转载出处 作者：ssttIsme 我做过SpringBoot和SpringCloud的项目。我们项目中使用很多技术来构建我们的项目。 SpringBoot来构建我们的项目，使用SpringCloud相关技术来实现微服务架构。 SpringBoot是一个基于maven的项目构建工具。目前我们使用版本比较稳定的1.5.6.项目后期我们项目组使用STS，Spring集成eclipse。 使用Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot、SpringCloud、dubbo、zookeeper之间的区别">
+<meta property="og:url" content="https://cssmini.github.io/cssmini_index/archives/29416.html">
+<meta property="og:site_name" content="随风而逝">
+<meta property="og:description" content="转载出处 作者：ssttIsme 我做过SpringBoot和SpringCloud的项目。我们项目中使用很多技术来构建我们的项目。 SpringBoot来构建我们的项目，使用SpringCloud相关技术来实现微服务架构。 SpringBoot是一个基于maven的项目构建工具。目前我们使用版本比较稳定的1.5.6.项目后期我们项目组使用STS，Spring集成eclipse。 使用Spring">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-18T03:54:00.000Z">
+<meta property="article:modified_time" content="2025-01-11T20:34:33.125Z">
+<meta property="article:author" content="乘风 hexiii">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="dubbo">
+<meta property="article:tag" content="分布式">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="随风而逝" href="/cssmini_index/atom.xml">
+    
+    <link rel="shortcut icon" href="/cssmini_index/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/cssmini_index/img/brand.jpg)">
+      <div class="brand">
+        <a href="/cssmini_index/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/cssmini_index/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">乘风 hexiii</h5>
+          <a href="mailto:cssmini@foxmail.com" title="cssmini@foxmail.com" class="mail">cssmini@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect active">
+              <a href="/cssmini_index/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/books"  >
+                <i class="icon icon-lg icon-bookmark"></i>
+                Books
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/movies"  >
+                <i class="icon icon-lg icon-film"></i>
+                Movies
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/cssmini" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/cssmini_index/about"  >
+                <i class="icon icon-lg icon-quote-right"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <div class="container fade-scale">
+        <h1 class="title">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-03-18T03:54:00.000Z" itemprop="datePublished" class="page-time">
+  2020-03-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/">转载</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/%E5%BC%80%E5%8F%91/">开发</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Zookeeper和Eureka的区别？"><span class="post-toc-number">1.</span> <span class="post-toc-text">Zookeeper和Eureka的区别？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。"><span class="post-toc-number">2.</span> <span class="post-toc-text">Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ribbon前端负载均衡"><span class="post-toc-number">3.</span> <span class="post-toc-text">Ribbon前端负载均衡</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。"><span class="post-toc-number">4.</span> <span class="post-toc-text">Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Zuul-gataway-API网关，认证授权，类似shiro。转发类似nginx。"><span class="post-toc-number">5.</span> <span class="post-toc-text">Zuul gataway API网关，认证授权，类似shiro。转发类似nginx。</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#SpringCloudConfig配置中心-轻量级-速度快"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">SpringCloudConfig配置中心(轻量级,速度快)</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SpringCloud和dubbo比较"><span class="post-toc-number">6.</span> <span class="post-toc-text">SpringCloud和dubbo比较</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#面向？"><span class="post-toc-number">7.</span> <span class="post-toc-text">面向？</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-SpringBoot、SpringCloud、dubbo、zookeeper之间的区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-03-18 11:54:00" datetime="2020-03-18T03:54:00.000Z"  itemprop="datePublished">2020-03-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/">转载</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/%E5%BC%80%E5%8F%91/">开发</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="https://www.jianshu.com/p/945fdab6eb37" target="_blank" rel="noopener">转载出处</a></p>
+<p>作者：ssttIsme</p>
+<p>我做过SpringBoot和SpringCloud的项目。我们项目中使用很多技术来构建我们的项目。</p>
+<p>SpringBoot来构建我们的项目，使用SpringCloud相关技术来实现微服务架构。</p>
+<p>SpringBoot是一个基于maven的项目构建工具。目前我们使用版本比较稳定的1.5.6.项目后期我们项目组使用STS，Spring集成eclipse。</p>
+<p>使用SpringCloud微服务框架，我们项目组之前还有dubbo+zookeeper。微服务框架内容非常广泛，我们项目中使用Eurka注册中心，Ribbon前端负载均衡(在本地有缓存-转向服务的列表-该列表随着Eurka更新)。</p>
+<p>Hystrix断路器或者熔断器，Zuul实现api网关，SideCar实现异构开发语言支持。SpringCloud原生ConfigServer配置中心，Git作为分布式配置中心的数据存储的地方。</p>
+<p>我们项目中使用Eurka作为注册中心。而没有使用dubbo使用的zookeeper作为注册中心。</p>
+<a id="more"></a>
+
+<p>我们基于分布式系统设计的定理，CAP原则。C一致性，A可用性（可用性不等于可靠性），P分区容错性。基于分布式的系统必须实现P分区容错性，一般设计要么侧重AP,要么侧重CP。</p>
+<h3 id="Zookeeper和Eureka的区别？"><a href="#Zookeeper和Eureka的区别？" class="headerlink" title="Zookeeper和Eureka的区别？"></a>Zookeeper和Eureka的区别？</h3><ol>
+<li>Zookeeper侧重CP设计，强调一致性。Zookeeper结构是主从结构，有leader,其他节点都是follower。当在Zookeeper节点宕机个数超过一半时和zookeeper集群在选举时，zookeeper是不推荐使用的。</li>
+<li>Eureka侧重AP设计，强调可用性。Eurka结构点对点。每个节点互为主从，即是主节点，又是从节点。每个节点都会同步所有的数据。Eurka数据都在内存中，底层就是concurrentHashMap,防止高并发线程安全。多级缓存，4级。应对高并发。Eureka心跳机制，心跳从client端，每隔30s向服务端发起心跳请求，顺便检查数据是否变化。如果没有变化，等待下一个周期来发起心跳。如果服务列表变化，就从Eurka中同步列表。即使所有的节点都宕机，服务依然可用，client在发起端，它是EurkaClient，本地缓存之前路由，直接转向。</li>
+</ol>
+<h3 id="Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。"><a href="#Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。" class="headerlink" title="Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。"></a>Feign封装Rest支持，对外体现是一个接口，目前来说比RestTemplate方式好用。具体Feign就是写一个接口。但是这个接口的坑非常多。</h3><ol>
+<li>SpringCloud号称整合Feign之后完全兼容SpringMVC.实际不是完全兼容，差异很大<ol start="2">
+<li>@RequestMapping,@Get,@Post,Feign目前不支持</li>
+<li>@RequestMapping(“/aaa/bbb”)controller中可以分成两个段，但是Feign类上就不能写了</li>
+<li>简单参数，@PathVariable(“name”)必须写全，controller可以省略</li>
+<li>对象参数，controller直接支持对象参数，Feign不支持，@RequestBody以json接参，内部才能动态传入到对象中。</li>
+<li>时间bug+ObjectMapper(jackson没做可配置)，两个解决方案，feign接参字符串，拦截器单独写。</li>
+</ol>
+</li>
+</ol>
+<h3 id="Ribbon前端负载均衡"><a href="#Ribbon前端负载均衡" class="headerlink" title="Ribbon前端负载均衡"></a>Ribbon前端负载均衡</h3><ol>
+<li><p>nginx后端负载均衡，nginx按配置转向，它不能感知服务死活，直接转向，有可能超时。</p>
+</li>
+<li><p>ribbon有本地客户端，转向信息保存在本地缓存中，直接从这个缓存中选中路径，转向(没到服务端就选择路径-按轮询算法选择)。Ribbon能感知服务死活，因为它Eureka，Eureka是动态维护服务列表的。(Ribbon从Eurka更新，只要Eurka正常，不正常的服务就通过心跳被去掉，没有那个列表就不会导致导向错误甚至超时)</p>
+</li>
+</ol>
+<blockquote>
+<p>请求-》Zuul网关-》nginx-》ribbon</p>
+</blockquote>
+<h3 id="Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。"><a href="#Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。" class="headerlink" title="Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。"></a>Hystrix断路器能实现限流，降级-不重要的服务少导向，甚至停止，走断路器返回默认值。</h3><p>Hystrix三种状态:关闭，半开，打开。</p>
+<p>断路器在业务正常访问时，处于”关闭”状态，当业务访问失败时，超过预期值阀值，然后才切换打开状态。回调fallback断路器方法，这个方法返回默认值(预案)，返回json对象。不是一直失败，一直打开。当用户发现微服务异常，修复异常。微服务章程访问。它每次失败时先试试能否正常访问，一旦测试业务访问正常，会毫不犹豫地从半开状态切换到关闭状态。</p>
+<p>和Zuul整合后，必须按照Zuul方法去调用，实现接口。</p>
+<p>传统编程中以前没有这方面的内容，抛出异常。</p>
+<h3 id="Zuul-gataway-API网关，认证授权，类似shiro。转发类似nginx。"><a href="#Zuul-gataway-API网关，认证授权，类似shiro。转发类似nginx。" class="headerlink" title="Zuul gataway API网关，认证授权，类似shiro。转发类似nginx。"></a>Zuul gataway API网关，认证授权，类似shiro。转发类似nginx。</h3><ol>
+<li>所有用户的请求都必须通过它来中转。</li>
+<li>三条通路:服务提供者，服务消费者，Zuul。实际开发中部署，Zuul在外网暴露，提供者和消费者不暴露(内网)。</li>
+</ol>
+<p>消费者可以增强我们的程序，无需自己写.</p>
+<h4 id="SpringCloudConfig配置中心-轻量级-速度快"><a href="#SpringCloudConfig配置中心-轻量级-速度快" class="headerlink" title="SpringCloudConfig配置中心(轻量级,速度快)"></a>SpringCloudConfig配置中心(轻量级,速度快)</h4><ol>
+<li><p>替代本地属性文件解决方案，如果服务器个数非常多，100+。如果每台服务都去手动修改，在很长的时间内数据不一致。手动修改，会遗漏。配置中心就把单机的配置升级到分布式的环境中。每台机器都能访问配置中心。SpringCloudConfig是利用git存储，天然就是分布式。</p>
+</li>
+<li><p>ZooKeeper配置中心，它内部是小的树形结构，称为数据字典，字典很小。这个结构会在不同的节点，自动地同步，zookeeper主节点的数据从节点自动备份，所有节点数据互相联通。因为量小，zookeeper同步速度非常快。Hadoop的配置信息就是由Zookeeper来管理的。</p>
+</li>
+</ol>
+<h3 id="SpringCloud和dubbo比较"><a href="#SpringCloud和dubbo比较" class="headerlink" title="SpringCloud和dubbo比较"></a>SpringCloud和dubbo比较</h3><ol>
+<li>SpringCloud 内容繁多，形成SpringCloud全家桶，利用SpringBoot来构建程序更跨界。SpringCloud基于http协议,(纯文本)RESTFul+json(序列化json)返回</li>
+<li>2.Dubbo阿里开源，2003年在双11的产品，这个产品是经过极大实际使用的，而且在阿里运行6年。一开源，当当提升spring版本和rest支持dubbox.携程使用dubbo。Dubbo只是SOA的最佳实践，是微服务框架。底层基于TCP协议，RPC（基于二进制,谷歌的protobuf/thirft-性能更高的压缩二进制协议）方式-也叫二进制序列化(把对象转为可传输的东西)。</li>
+<li>性能上SpringCloud不如dubbo。而json天然异构。</li>
+<li>远期谷歌gRPC的要颠覆网络协议。谷歌先是默认https协议，现在要完全基于新的rpc方式。(Http协议不如RPC快)</li>
+<li>目前为止，dubbo宣称是SpingCloud的一个子集，专注于RPC的传输方式。</li>
+</ol>
+<h3 id="面向？"><a href="#面向？" class="headerlink" title="面向？"></a>面向？</h3><ol>
+<li>面向过程，日常搭建开发的代码都是面向过程的为了兼顾性能没有完全面向对象。mybais开发基于sql，面向过程。</li>
+<li>面向对象，开发中需求变更时能减少代码修改量，不能完全克服需求变更。</li>
+<li>面向函数，大数据的思考方式:面向对象+面向函数。jdk8也推出函数式编程。</li>
+<li>面向架构，SOA面向架构编程。SOA有一个重要概念:BUS总线，BUS最早想实现所有的按照标准的模业务模块式插入BUS总线中。如办公自动化和订单还有物流都可以接入总线。各个业务模块通过总线通信。梦想：一个大大的软件系统就OK。用友的u8,金蝶是中国财务软件底层构建了soa,但是自身性能不足。</li>
+<li>面向服务，微服务兴起，基于SOA概念，是SOA的降级。没有那么庞大。微服务是一个标准。它的标准是:Rest+JSON或RPC,springCloud选择前者(Rest+JSON+MQ),dubbo走了后者(基于RPC)</li>
+<li>Dubbo是SOA的最佳实践 </li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2025-01-11T20:34:33.125Z" itemprop="dateUpdated">2025-01-12 04:34:33</time>
+</span><br>
+
+
+        
+        <a href="/cssmini_index/archives/29416.html" target="_blank" rel="external">https://cssmini.github.io/cssmini_index/archives/29416.html</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://cssmini.github.io/cssmini_index">
+            <img src="/cssmini_index/img/avatar.jpg" alt="乘风 hexiii">
+            乘风 hexiii
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/Spring/" rel="tag">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/dubbo/" rel="tag">dubbo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cssmini.github.io/cssmini_index/archives/29416.html&title=《SpringBoot、SpringCloud、dubbo、zookeeper之间的区别》 — 随风而逝&pic=https://cssmini.github.io/cssmini_index/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cssmini.github.io/cssmini_index/archives/29416.html&title=《SpringBoot、SpringCloud、dubbo、zookeeper之间的区别》 — 随风而逝&source=转载出处
+作者：ssttIsme
+我做过SpringBoot和SpringCloud的项目。我们项目中使用很多技术来构建我们的项目。
+SpringBoot..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cssmini.github.io/cssmini_index/archives/29416.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringBoot、SpringCloud、dubbo、zookeeper之间的区别》 — 随风而逝&url=https://cssmini.github.io/cssmini_index/archives/29416.html&via=https://cssmini.github.io/cssmini_index" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cssmini.github.io/cssmini_index/archives/29416.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/cssmini_index/archives/23998.html" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">微信登录流程笔记</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/cssmini_index/archives/23552.html" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">什么是数据埋点</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//code.bdstatic.com/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "WKgyrUxHoWUR11uXCynQDB1W-gzGzoHsz",
+            appKey: "mfEzPtkXGazEO6Q6jxLb2hb8",
+            avatar: "mm",
+            placeholder: "留下你的足迹...",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+            <p>
+                
+                    <span><a href="/cssmini_index/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+                    
+                        <span><a id="jinrishici-sentence" href="https://www.jinrishici.com/" target="_blank" rel="noopener"></a></span>
+            </p>
+    </div>
+    <div class="bottom">
+        <p><span>乘风 hexiii &copy; 2018 - 2025</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+            <br/>
+            <span id="spanSitetime"></span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cssmini.github.io/cssmini_index/archives/29416.html&title=《SpringBoot、SpringCloud、dubbo、zookeeper之间的区别》 — 随风而逝&pic=https://cssmini.github.io/cssmini_index/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cssmini.github.io/cssmini_index/archives/29416.html&title=《SpringBoot、SpringCloud、dubbo、zookeeper之间的区别》 — 随风而逝&source=转载出处
+作者：ssttIsme
+我做过SpringBoot和SpringCloud的项目。我们项目中使用很多技术来构建我们的项目。
+SpringBoot..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cssmini.github.io/cssmini_index/archives/29416.html" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SpringBoot、SpringCloud、dubbo、zookeeper之间的区别》 — 随风而逝&url=https://cssmini.github.io/cssmini_index/archives/29416.html&via=https://cssmini.github.io/cssmini_index" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cssmini.github.io/cssmini_index/archives/29416.html" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://cssmini.github.io/cssmini_index/archives/29416.html" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/cssmini_index/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<script src="/js/userScript.js" charset="utf-8"></script>
+<script>
+        // 站点运行时间统计
+        siteTime();
+    // 站点运行时间统计
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var startDate = '2019-04-02';
+        var dataArr = startDate.split('-');
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+
+        var t1 = Date.UTC(dataArr[0], dataArr[1], dataArr[2], 00, 00, 00); //北京时间2016-12-1 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+
+        //var diffYears = Math.floor(diff / years);
+        //var diffDays = Math.floor((diff / days) - diffYears * 365);
+        //var diffDays = Math.floor((diff / days));
+        //var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        //var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        //var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+
+        var diffDays = Math.floor((diff / days));
+        var diffHours = Math.floor((diff - diffDays * days) / hours);
+        var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("spanSitetime").innerHTML = "勉强维持运行 " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒 ";
+    }
+</script>
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网站崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>
