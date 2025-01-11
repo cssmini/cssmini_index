@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://cssmini.github.io/cssmini_index/tags/index.html</loc>
+    <loc>https://cssmini.github.io/cssmini_index/movies/index.html</loc>
     
     <lastmod>2025-01-11</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://cssmini.github.io/cssmini_index/movies/index.html</loc>
+    <loc>https://cssmini.github.io/cssmini_index/tags/index.html</loc>
     
     <lastmod>2025-01-11</lastmod>
     
@@ -233,20 +233,6 @@
   </url>
   
   <url>
-    <loc>https://cssmini.github.io/cssmini_index/tags/windows/</loc>
-    <lastmod>2025-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://cssmini.github.io/cssmini_index/tags/%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/</loc>
-    <lastmod>2025-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://cssmini.github.io/cssmini_index/tags/Spring/</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -268,6 +254,34 @@
   </url>
   
   <url>
+    <loc>https://cssmini.github.io/cssmini_index/tags/windows/</loc>
+    <lastmod>2025-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://cssmini.github.io/cssmini_index/tags/%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8/</loc>
+    <lastmod>2025-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://cssmini.github.io/cssmini_index/tags/%E6%95%B0%E6%8D%AE%E5%9F%8B%E7%82%B9/</loc>
+    <lastmod>2025-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://cssmini.github.io/cssmini_index/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2025-01-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://cssmini.github.io/cssmini_index/tags/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98/</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -282,13 +296,6 @@
   </url>
   
   <url>
-    <loc>https://cssmini.github.io/cssmini_index/tags/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2025-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://cssmini.github.io/cssmini_index/tags/%E6%94%AF%E4%BB%98/</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -297,13 +304,6 @@
   
   <url>
     <loc>https://cssmini.github.io/cssmini_index/tags/%E5%BE%AE%E4%BF%A1/</loc>
-    <lastmod>2025-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://cssmini.github.io/cssmini_index/tags/%E6%95%B0%E6%8D%AE%E5%9F%8B%E7%82%B9/</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
