@@ -5,7 +5,7 @@
     // 请求 hitohoto.json 数据
     function loadData() {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/hitohoto.json', true);
+        xhr.open('GET', '/cssmini_index/hitohoto.json', true);
         xhr.onload = function() {
             if (this.status >= 200 && this.status < 300) {
                 var res = JSON.parse(this.response || this.responseText);
