@@ -61,8 +61,8 @@
 }
 .post-content blockquote p{ margin: 0; }
 
-.post-content a{ color: var(--color-link); text-decoration: none; }
-.post-content a:hover{ text-decoration: underline; }
+.post-content a{ color: var(--color-link); text-decoration: none; transition: color .15s; }
+.post-content a:hover{ color: var(--color-link-hover); text-decoration: underline; }
 
 .post-content strong{ font-weight: 700; }
 .post-content em{ color: var(--color-text-secondary); }
@@ -149,20 +149,17 @@
 .article-tag-list-link:hover{ color: #fff; background: var(--color-link); }
 
 /* ─── nav ─── */
-.post-nav{ margin-top: 40px; margin-bottom: 20px; }
-.post-nav-inner{ display: flex; gap: 20px; }
+.post-nav{ display: flex; gap: 32px; padding: 0 12px; margin: 32px 0; }
 .post-nav-item{
-    flex: 1; min-width: 0; display: block; padding: 18px 22px;
-    background: #fff; border: 1px solid var(--color-border);
-    border-radius: 4px; text-decoration: none;
-    box-shadow: 0 1px 3px rgba(0,0,0,.06);
-    transition: border-color .2s, box-shadow .2s;
+    flex: 1; min-width: 0;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--color-text-muted);
+    text-decoration: none; transition: color .2s;
 }
-.post-nav-item:hover{ border-color: var(--color-link); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
-.post-nav-next{ text-align: right; }
-.post-nav-empty{ visibility: hidden; }
-.post-nav-label{ display: block; margin-bottom: 6px; font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .05em; }
-.post-nav-title{ display: block; font-size: 13px; color: var(--color-text); line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.post-nav-item:hover{ color: var(--color-link); }
+.post-nav-next{ justify-content: flex-end; text-align: right; }
+.post-nav-arrow{ flex-shrink: 0; }
+.post-nav-text{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ─── TOC ─── */
 .post-widget{ width: 280px; flex-shrink: 0; position: sticky; top: 90px; align-self: flex-start; }
@@ -187,6 +184,6 @@
     .post-content{ font-size: 15px; }
     .post-content .highlight,
     .post-content pre{ margin-left: -18px; margin-right: -18px; padding: 16px; border-radius: 0; }
-    .post-nav{ flex-direction: column; }
-    .post-nav-item{ text-align: center; }
+    .post-nav{ flex-direction: column; gap: 12px; }
+    .post-nav-item{ justify-content: center; }
 }

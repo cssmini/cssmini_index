@@ -6,7 +6,7 @@
 .header{ background-color: var(--color-bg); }
 .header__img{
     height: 400px;
-    background: url(../img/wallhaven-663396.png) center no-repeat;
+    background: url(../img/wallhaven-compressed.png) center no-repeat;
     background-size: cover;
     overflow: hidden;
 }
@@ -39,7 +39,7 @@
     text-indent: 50px;
     font-size: 18px; font-weight: var(--weight-semibold);
     color: var(--color-text);
-    background: url(../img/logo.png) no-repeat;
+    background: url(../img/logo.jpg) no-repeat;
     background-size: 32px 32px; background-position: 8px center;
     position: absolute; left: 20px;
 }
@@ -131,7 +131,7 @@ body.menu-open .nav-mask {
 .search-panel__input button {
     width: 28px; height: 28px;
     padding: 0; border: none; background: none;
-    font-size: 14px;`n    cursor: pointer; color: var(--color-text-muted);`n    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;   cursor: pointer; color: var(--color-text-muted);   display: flex; align-items: center; justify-content: center;
 }
 .search-panel__input button:hover { color: var(--color-link-hover); }
 .search-panel__body { max-height: 50vh; overflow-y: auto; }

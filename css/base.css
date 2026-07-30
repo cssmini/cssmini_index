@@ -165,7 +165,7 @@ pre code { padding: 0; background: transparent; font-size: inherit; }
 /* Loading bar */
 .loading-bar {
     position: fixed; top: 0; left: 0; width: 0; height: 2px;
-    background: var(--color-link); z-index: 10000;
+    background: var(--color-link-hover); z-index: 10000;
     transition: width .3s ease;
 }
 .loading-bar.start { width: 40%; }
