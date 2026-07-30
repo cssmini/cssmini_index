@@ -1,216 +1,282 @@
 <!DOCTYPE html>
-<html>
-<head>
-    
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    
-
-    
-<!-- Baidu Tongji -->
-<script>var _hmt = _hmt || []</script>
-<script async src="//hm.baidu.com/hm.js?ef375efd6107ecef8726548f2cfae9d0"></script>
-<!-- End Baidu Tongji -->
+<title>设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</title>
 
 
+<meta name="description" content="转载 设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）">
+<meta name="author" content="Kinrai">
+<meta name="keywords" content="乘风,cssmini">
 
 
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇） | 随风而逝 | 秋风清，秋月明.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="安全,登录">
-    <meta name="description" content="转载 设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）">
+
+
+
+<link rel="canonical" href="https://cssmini.github.io/cssmini_index/cssmini_index/archives/12383.html">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/cssmini_index/sitemap.xml">
+
+
+<link rel="shortcut icon" href="/cssmini_index/favicon.ico">
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&amp;family=Noto+Sans+JP:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+
+
+<link rel="stylesheet" type="text/css" href="/cssmini_index/css/base.css">
+<link rel="stylesheet" type="text/css" href="/cssmini_index/css/every.css">
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/cssmini_index/css/article.css">
+<link rel="stylesheet" type="text/css" href="/cssmini_index/css/about.css">
+
+
+<link rel="alternate" href="/cssmini_index/cssmini_index/atom.xml" type="application/atom+xml" title="三钱秋水">
+
+<!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）">
-<meta property="og:url" content="https://cssmini.github.io/cssmini_index/archives/12383.html">
-<meta property="og:site_name" content="随风而逝">
 <meta property="og:description" content="转载 设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）">
+<meta property="og:url" content="https://cssmini.github.io/cssmini_index/cssmini_index/archives/12383.html">
+<meta property="og:site_name" content="三钱秋水">
+<meta property="og:image" content="https://cssmini.github.io/cssmini_index/cssmini_index//cssmini_index/favicon.ico">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-18T02:39:05.000Z">
-<meta property="article:modified_time" content="2025-01-11T20:34:33.126Z">
-<meta property="article:author" content="乘风 hexiii">
-<meta property="article:tag" content="安全">
-<meta property="article:tag" content="登录">
+
+<!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
-    
-        <link rel="alternate" type="application/atom+xml" title="随风而逝" href="/cssmini_index/atom.xml">
-    
-    <link rel="shortcut icon" href="/cssmini_index/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+<meta name="twitter:title" content="设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）">
+<meta name="twitter:description" content="转载 设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）">
 
-    <!-- custom head -->
-    
 
-<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body>
-    <div id="loading" class="active"></div>
+    <div class="loading-bar" id="loading-bar"></div>
+    <header class="header">
+    <div class="header__img" style="background-image:url(/cssmini_index/img/wallhaven-663396.png)"></div>
+</header>
 
-    <aside id="menu"  >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/cssmini_index/img/brand.jpg)">
-      <div class="brand">
-        <a href="/cssmini_index/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/cssmini_index/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">乘风 hexiii</h5>
-          <a href="mailto:cssmini@foxmail.com" title="cssmini@foxmail.com" class="mail">cssmini@foxmail.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/cssmini_index/"  >
-                <i class="icon icon-lg icon-home"></i>
-                Home
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect active">
-              <a href="/cssmini_index/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/cssmini_index/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/cssmini_index/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/cssmini_index/books"  >
-                <i class="icon icon-lg icon-bookmark"></i>
-                Books
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/cssmini_index/movies"  >
-                <i class="icon icon-lg icon-film"></i>
-                Movies
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/cssmini" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/cssmini_index/about"  >
-                <i class="icon icon-lg icon-quote-right"></i>
-                About me
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
+<div class="nav-bar" id="nav-bar">
+    <div class="nav-bar__inner">
+        <div class="header__head-portrait" style="background-image:url(/cssmini_index/img/avatar.jpg)"></div>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="菜单">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="header__nav-2">
+            
+                
+                <a class="header__nav-item" href="/cssmini_index/">首页</a>
+                
+                <a class="header__nav-item" href="/cssmini_index/archives">归档</a>
+                
+                <a class="header__nav-item" href="/cssmini_index/categories">分类</a>
+                
+                <a class="header__nav-item" href="/cssmini_index/tags">标签</a>
+                
+                <a class="header__nav-item" href="/cssmini_index/guestbook">留言</a>
+                
+                <a class="header__nav-item" href="/cssmini_index/about">关于</a>
+                
+            
+        </nav>
+
         
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
+        <button class="header__search-toggle" id="search-toggle" aria-label="搜索">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+        </button>
+        <div class="header__search-panel" id="search-panel">
+            <div class="search-panel__input">
+                <input type="text" id="search-key" placeholder="输入关键词搜索..." autocomplete="off">
+                <button id="search-close" aria-label="关闭">&#x2715;</button>
+            </div>
+            <div class="search-panel__body">
+                <ul class="search-result" id="search-result"></ul>
+            </div>
         </div>
         
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
     </div>
-</header>
-<header class="content-header post-header">
-    <div class="container fade-scale">
-        <h1 class="title">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</h1>
-        <h5 class="subtitle">
+</div>
+
+<template id="search-tpl">
+<li class="search-result__item">
+    <a href="{path}" class="search-result__link">
+        <h4 class="search-result__title">{title}</h4>
+        <div class="search-result__meta">
+            <span class="search-result__tags">{tags}</span>
+            <time class="search-result__date">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+    <!-- Mobile drawer menu -->
+    <div class="nav-drawer" id="nav-drawer">
+        <div class="nav-drawer__head">
+            <button class="nav-drawer__close" id="nav-drawer-close" aria-label="关闭">&#x2715;</button>
             
-                <time datetime="2020-03-18T02:39:05.000Z" itemprop="datePublished" class="page-time">
-  2020-03-18
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/">转载</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/uni-app/">uni-app</a></li></ul></li></ul>
-
+            <div class="nav-drawer__avatar" style="background-image:url(/cssmini_index/img/avatar.jpg)"></div>
             
-        </h5>
-        
-    </div>
-    
-
-</header>
-
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#你是否真的需要登录功能？"><span class="post-toc-number">1.</span> <span class="post-toc-text">你是否真的需要登录功能？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#登录和注册要足够简单"><span class="post-toc-number">2.</span> <span class="post-toc-text">登录和注册要足够简单</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现登录后的session有几种方式？"><span class="post-toc-number">3.</span> <span class="post-toc-text">实现登录后的session有几种方式？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#APP当浏览器用，直接载入远程页面"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">APP当浏览器用，直接载入远程页面</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#调用后端接口"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">调用后端接口</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调用后端接口怎么样才安全？"><span class="post-toc-number">4.</span> <span class="post-toc-text">调用后端接口怎么样才安全？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在APP中保存登录数据，每次调用接口时传输"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">在APP中保存登录数据，每次调用接口时传输</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#登录时请求一次token，之后用token调用接口"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">登录时请求一次token，之后用token调用接口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#更安全一点，获取token通过SSL"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">更安全一点，获取token通过SSL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#还要更更安全（这标题真省事）"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">还要更更安全（这标题真省事）</span></a></li></ol></li></ol>
+            <div class="nav-drawer__name">三钱秋水</div>
+            <div class="nav-drawer__author">@Kinrai</div>
+        </div>
+        <nav class="nav-drawer__nav">
+            
+                
+                <a class="nav-drawer__item" href="/cssmini_index/">
+                    <span class="nav-drawer__item-icon">
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        
+                        
+                        
+                        
+                        
+                    </span>
+                    首页
+                </a>
+                
+                <a class="nav-drawer__item" href="/cssmini_index/archives">
+                    <span class="nav-drawer__item-icon">
+                        
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V6h5.17l2 2H20v10z"/></svg>
+                        
+                        
+                        
+                        
+                    </span>
+                    归档
+                </a>
+                
+                <a class="nav-drawer__item" href="/cssmini_index/categories">
+                    <span class="nav-drawer__item-icon">
+                        
+                        
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        
+                        
+                        
+                    </span>
+                    分类
+                </a>
+                
+                <a class="nav-drawer__item" href="/cssmini_index/tags">
+                    <span class="nav-drawer__item-icon">
+                        
+                        
+                        
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+                        
+                        
+                    </span>
+                    标签
+                </a>
+                
+                <a class="nav-drawer__item" href="/cssmini_index/guestbook">
+                    <span class="nav-drawer__item-icon">
+                        
+                        
+                        
+                        
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                        
+                    </span>
+                    留言
+                </a>
+                
+                <a class="nav-drawer__item" href="/cssmini_index/about">
+                    <span class="nav-drawer__item-icon">
+                        
+                        
+                        
+                        
+                        
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    </span>
+                    关于
+                </a>
+                
+            
+            
+            <div class="nav-drawer__search">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="nav-drawer__search-icon">
+                    <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <input type="text" id="menu-search-key" placeholder="搜索文章..." autocomplete="off">
+            </div>
+            <ul class="search-result nav-drawer__search-result" id="menu-search-result"></ul>
+            
         </nav>
-    </aside>
+    </div>
+    <div class="nav-mask" id="nav-mask"></div>
+
+    <div class="screen-1">
+        <div class="screen-1__warp">
+            <div class="screen-1__left">
+    <div class="screen-1__left__about-author">
+        
+        <div class="screen-1__left__avatar" style="background-image:url(/cssmini_index/img/avatar.jpg)"></div>
+        
+        <h3 class="screen-1__left__blog-name">三钱秋水</h3>
+        <h5 class="screen-1__left__author-name">@Kinrai</h5>
+        
+        <div class="screen-1__left__signature">"Fear no mistakes. Keep learning."</div>
+        
+        <ul class="screen-1__left__about-other">
+            <li>&#x1F3E0;&nbsp;Tokyo Japan</li>
+            <li>&#x1F4E7;&nbsp;<a href="mailto:cssmini@foxmail.com">cssmini@foxmail.com</a></li>
+            <li>&#x1F4BB;&nbsp;<a href="https://github.com/cssmini" target="_blank">github.com/cssmini</a></li>
+        </ul>
+    </div>
+</div>
 
 
-<article id="post-设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）"
-  class="post-article article-type-post fade" itemprop="blogPost">
+            <div class="screen-1__middle">
+                <div class="post-header-mobile">
+    <h1 class="post-header-title">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</h1>
+</div>
+<div class="screen-1__middle__content">
+    <article class="post-article">
+        <div class="post-card">
+            <h1 class="post-card-title">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</h1>
+            <div class="post-meta">
+                
+                <span class="post-meta-item"><time datetime="2020-03-18">2020-03-18</time>
+</span>
+                
+                
+                <span class="post-meta-item">
 
-    <div class="post-card">
-        <h1 class="post-card-title">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2020-03-18 11:39:05" datetime="2020-03-18T02:39:05.000Z"  itemprop="datePublished">2020-03-18</time>
+<a href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/">转载</a>
 
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/">转载</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/uni-app/">uni-app</a></li></ul></li></ul>
+<a href="/cssmini_index/categories/%E8%BD%AC%E8%BD%BD/uni-app/">uni-app</a>
 
 
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+                
+                
+                <span class="post-meta-item">
+<span id="busuanzi_container_page_pv" style="display:none" title="阅读量">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="vertical-align:-2px;margin-right:3px"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+    <span id="busuanzi_value_page_pv"></span>
 </span>
 
+</span>
+                
+            </div>
 
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <p><a href="https://ask.dcloud.net.cn/article/157" target="_blank" rel="noopener">转载 设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</a></p>
+            <div class="post-content">
+                <p><a href="https://ask.dcloud.net.cn/article/157" target="_blank" rel="noopener">转载 设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</a></p>
 <a id="more"></a>
 
 <blockquote>
@@ -229,349 +295,129 @@
 <h3 id="更安全一点，获取token通过SSL"><a href="#更安全一点，获取token通过SSL" class="headerlink" title="更安全一点，获取token通过SSL"></a>更安全一点，获取token通过SSL</h3><p>刚才的方法，机智一点儿的读者大概会心存疑虑：那获取token时不还是得明文传输一次密码吗？<br>是的，你可以将这个获取token的地址，用SSL来保护（比如<a href="https://api.abc.com/get_token/），这样黑客即使截了包，一时半会儿也解不出什么信息。" target="_blank" rel="noopener">https://api.abc.com/get_token/），这样黑客即使截了包，一时半会儿也解不出什么信息。</a><br>SSL证书的获取渠道很多，我相信你总有办法查到，所以不废话了。不过话说namecheap上的SSL证书比godaddy的要便宜得多……（这是吐槽）<br><strong>tips:</strong>前段时间OpenSSL漏洞让很多服务器遭殃，所以如果自己搭服务器，一定记得装补丁。<br><strong>tips:</strong>可以把所有接口都弄成SSL的吗？可以。但会拖慢服务器，如果是配置并不自信的VPS，建议不折腾。</p>
 <h3 id="还要更更安全（这标题真省事）"><a href="#还要更更安全（这标题真省事）" class="headerlink" title="还要更更安全（这标题真省事）"></a>还要更更安全（这标题真省事）</h3><p>还记得刚才APP向服务器请求token时，可以加入的用户信息吗？比如用户的设备deviceid。<br>如果我们在调用接口时，还附带一个当前时间戳参数timestamp，同时，用deviceid和这个时间戳再生成一个参数sign，比如 md5(deviceid timestamp token)这样的形式。而服务端首先验证一下参数中的时间戳与当前服务器时间是否一致（误差保持在合理范围内即可，比如5分钟），然后根据用户保存在服务器中的deviceid来对参数中的时间戳进行相同的变形，验证是否匹配，那便自然“更更安全”了。<br><strong>tips:</strong>如果对整个调用请求中的参数进行排序，再以deviceid和timestamp加上排序后的参数来对整个调用生成1个sign，黑客即使截获sign，不同的时间点、参数请求所使用的sign也是不同的，难以伪造，自然会更安全。当然，写起来也更费事。<br><strong>tips:</strong>明白了原理，整个验证过程是可以根据自己的需求改造的。</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2025-01-11T20:34:33.126Z" itemprop="dateUpdated">2025-01-12 05:34:33</time>
-</span><br>
-
-
-        
-        <a href="/cssmini_index/archives/12383.html" target="_blank" rel="external">https://cssmini.github.io/cssmini_index/archives/12383.html</a>
-        
-    </div>
-    
-    <footer>
-        <a href="https://cssmini.github.io/cssmini_index">
-            <img src="/cssmini_index/img/avatar.jpg" alt="乘风 hexiii">
-            乘风 hexiii
-        </a>
-    </footer>
-</blockquote>
-
-        
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/cssmini_index/tags/%E7%99%BB%E5%BD%95/" rel="tag">登录</a></li></ul>
-
+            </div>
 
             
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cssmini.github.io/cssmini_index/archives/12383.html&title=《设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）》 — 随风而逝&pic=https://cssmini.github.io/cssmini_index/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cssmini.github.io/cssmini_index/archives/12383.html&title=《设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）》 — 随风而逝&source=转载 设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cssmini.github.io/cssmini_index/archives/12383.html" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）》 — 随风而逝&url=https://cssmini.github.io/cssmini_index/archives/12383.html&via=https://cssmini.github.io/cssmini_index" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cssmini.github.io/cssmini_index/archives/12383.html" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
+<div class="post-copyright">
+    <ul>
+        <li><strong>本文作者：</strong>Kinrai</li>
+        <li><strong>本文链接：</strong><a href="https://cssmini.github.io/cssmini_index/cssmini_index/archives/12383.html">https://cssmini.github.io/cssmini_index/cssmini_index/archives/12383.html</a></li>
+        <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
     </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
 </div>
 
 
 
-        </div>
-    </div>
-
+            
+            <div class="post-footer">
+                
+<div class="article-tag-list">
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/cssmini_index/archives/19273.html" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">HTML加密混淆</h4>
-      </a>
-    </div>
-  
+    <a class="article-tag-list-link" href="/cssmini_index/tags/%E5%AE%89%E5%85%A8/">安全</a>
+    
+    <a class="article-tag-list-link" href="/cssmini_index/tags/%E7%99%BB%E5%BD%95/">登录</a>
+    
+</div>
 
-  
-    <div class="waves-block waves-effect next">
-      <a href="/cssmini_index/archives/44716.html" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Nginx 常用命令</h4>
-      </a>
+
+            </div>
+            
+        </div>
+
+        
+        
+<nav class="post-nav">
+    <div class="post-nav-inner">
+        
+        <a href="/cssmini_index/archives/19273.html" class="post-nav-item">
+            <span class="post-nav-label">&larr; 上一篇</span>
+            <span class="post-nav-title">HTML加密混淆</span>
+        </a>
+        
+        
+        <a href="/cssmini_index/archives/44716.html" class="post-nav-item post-nav-next">
+            <span class="post-nav-label">下一篇 &rarr;</span>
+            <span class="post-nav-title">Nginx 常用命令</span>
+        </a>
+        
     </div>
-  
 </nav>
 
 
+        
+
+    </article>
 
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="comments" id="comments" style="min-height:150px;">
+<div style="padding: 20px; border-top: 1px solid #d8d8d8;">
     <script src="https://giscus.app/client.js"
-            data-repo="cssmini/cssmini_index"
-            data-repo-id="MDEwOlJlcG9zaXRvcnkyMzA0MDk5NTA="
-            data-category="Comments"
-            data-category-id="DIC_kwDODbvG3s4DCS-z"
-            data-mapping="pathname"
-            data-strict="0"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="bottom"
-            data-theme="https://cssmini.github.io/cssmini_index/css/giscus-custom.css"
-            data-lang="zh-CN"
-            data-loading="eager"
-            crossorigin="anonymous"
-            async>
+        data-repo="cssmini/cssmini_index"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMzA0MDk5NTA="
+        data-category="Comments"
+        data-category-id="DIC_kwDODbvG3s4DCS-z"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="https://cssmini.github.io/cssmini_index/css/giscus-custom.css"
+        data-lang="zh-CN"
+        data-loading="eager"
+        crossorigin="anonymous"
+        async>
     </script>
-</section>
-
-
-
-
-</article>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-            <p>
-                
-                    <span><a href="/cssmini_index/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-                    
-                        <span><a id="jinrishici-sentence" href="https://www.jinrishici.com/" target="_blank" rel="noopener"></a></span>
-            </p>
-    </div>
-    <div class="bottom">
-        <p><span>乘风 hexiii &copy; 2018 - 2026</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-            <br/>
-            <span id="spanSitetime"></span>
-        </p>
-    </div>
-</footer>
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cssmini.github.io/cssmini_index/archives/12383.html&title=《设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）》 — 随风而逝&pic=https://cssmini.github.io/cssmini_index/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cssmini.github.io/cssmini_index/archives/12383.html&title=《设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）》 — 随风而逝&source=转载 设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cssmini.github.io/cssmini_index/archives/12383.html" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）》 — 随风而逝&url=https://cssmini.github.io/cssmini_index/archives/12383.html&via=https://cssmini.github.io/cssmini_index" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cssmini.github.io/cssmini_index/archives/12383.html" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://cssmini.github.io/cssmini_index/archives/12383.html" alt="微信分享二维码">
 </div>
 
 
 
 
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/cssmini_index/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
 </div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
             </div>
-            <time class="flex-col time">{date}</time>
+
+            
+                
+<aside class="post-widget" id="post-widget">
+    
+    <nav class="post-toc-wrap" id="post-toc">
+        <h4 class="post-toc-title">目录</h4>
+        <div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#你是否真的需要登录功能？"><span class="toc-number">1.</span> <span class="toc-text">你是否真的需要登录功能？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录和注册要足够简单"><span class="toc-number">2.</span> <span class="toc-text">登录和注册要足够简单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现登录后的session有几种方式？"><span class="toc-number">3.</span> <span class="toc-text">实现登录后的session有几种方式？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#APP当浏览器用，直接载入远程页面"><span class="toc-number">3.1.</span> <span class="toc-text">APP当浏览器用，直接载入远程页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用后端接口"><span class="toc-number">3.2.</span> <span class="toc-text">调用后端接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用后端接口怎么样才安全？"><span class="toc-number">4.</span> <span class="toc-text">调用后端接口怎么样才安全？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在APP中保存登录数据，每次调用接口时传输"><span class="toc-number">4.1.</span> <span class="toc-text">在APP中保存登录数据，每次调用接口时传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#登录时请求一次token，之后用token调用接口"><span class="toc-number">4.2.</span> <span class="toc-text">登录时请求一次token，之后用token调用接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更安全一点，获取token通过SSL"><span class="toc-number">4.3.</span> <span class="toc-text">更安全一点，获取token通过SSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#还要更更安全（这标题真省事）"><span class="toc-number">4.4.</span> <span class="toc-text">还要更更安全（这标题真省事）</span></a></li></ol></li></ol></div>
+    </nav>
+    
+</aside>
+
+            
         </div>
-    </a>
-</li>
-</template>
+    </div>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+    <footer class="footer">
+    &copy;2018-2026&ensp;Powered by <a href="https://github.com/cssmini/cssmini_index" target="_blank" rel="noopener">Every</a>
+    <br>
+    
+<span id="busuanzi_container_site_pv" style="display:none">
+    总访问 <span id="busuanzi_value_site_pv"></span>
+</span>
+&ensp;
+<span id="busuanzi_container_site_uv" style="display:none">
+    总访客 <span id="busuanzi_value_site_uv"></span>
+</span>
 
 
+</footer>
 
 
+    <button class="back-top" id="back-top" aria-label="返回顶部">↑</button>
+
+    <script>var SITE_ROOT = '/cssmini_index/';</script>
+<script src="/cssmini_index/js/main.js"></script>
+
+<script src="/cssmini_index/js/search.js"></script>
+
+
+<script src="/cssmini_index/js/hot.js"></script>
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-<script src="/cssmini_index/js/userScript.js" charset="utf-8"></script>
-<script>
-        // 站点运行时间统计
-        siteTime();
-    // 站点运行时间统计
-    function siteTime() {
-        window.setTimeout("siteTime()", 1000);
-        var startDate = '2019-04-02';
-        var dataArr = startDate.split('-');
-        var seconds = 1000;
-        var minutes = seconds * 60;
-        var hours = minutes * 60;
-        var days = hours * 24;
-        var years = days * 365;
-        var today = new Date();
-        var todayYear = today.getFullYear();
-        var todayMonth = today.getMonth() + 1;
-        var todayDate = today.getDate();
-        var todayHour = today.getHours();
-        var todayMinute = today.getMinutes();
-        var todaySecond = today.getSeconds();
-
-        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
-        year - 作为date对象的年份，为4位年份值
-        month - 0-11之间的整数，做为date对象的月份
-        day - 1-31之间的整数，做为date对象的天数
-        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
-        minutes - 0-59之间的整数，做为date对象的分钟数
-        seconds - 0-59之间的整数，做为date对象的秒数
-        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
-
-        var t1 = Date.UTC(dataArr[0], dataArr[1], dataArr[2], 00, 00, 00); //北京时间2016-12-1 00:00:00
-        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-        var diff = t2 - t1;
-
-        //var diffYears = Math.floor(diff / years);
-        //var diffDays = Math.floor((diff / days) - diffYears * 365);
-        //var diffDays = Math.floor((diff / days));
-        //var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-        //var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
-        //var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
-
-        var diffDays = Math.floor((diff / days));
-        var diffHours = Math.floor((diff - diffDays * days) / hours);
-        var diffMinutes = Math.floor((diff - diffDays * days - diffHours * hours) / minutes);
-        var diffSeconds = Math.floor((diff - diffDays * days - diffHours * hours - diffMinutes * minutes) / seconds);
-        document.getElementById("spanSitetime").innerHTML = "勉强维持运行 " + diffDays + "天 " + diffHours + "小时 " + diffMinutes + "分钟 " + diffSeconds + "秒 ";
-    }
-</script>
-
-<script>
-(function() {
-    var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '网站崩溃啦！';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '(つェ⊂)咦!又好了!';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script>
-
 
 
 </body>

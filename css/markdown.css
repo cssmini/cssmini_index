@@ -1,0 +1,71 @@
+.markdown-body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    word-spacing: 1px;
+    color: #2c3e50;
+    line-height: 1.85;
+    margin: 0;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.4;
+}
+.markdown-body h1 {
+    font-size: 32px;
+    margin: 0 0 40px;
+    letter-spacing: -0.01em;
+}
+.markdown-body h2 {
+    position: relative;
+    font-size: 24px;
+    padding-left: 16px;
+    margin: 36px 0 18px;
+}
+.markdown-body h3 {
+    font-size: 1.17em;
+    color: #e85d75;
+    font-weight: 600;
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 8px;
+    margin: 28px 0 14px;
+}
+.markdown-body h4 {
+    margin: 15px 0;
+}
+.markdown-body h2:before {
+    content: '';
+    width: 5px;
+    background: #f66;
+    position: absolute;
+    left: 0px;
+    height: 75%;
+    top: 12%;
+}
+.markdown-body blockquote {
+    margin: 2em 0;
+    padding-left: 24px;
+    border-left: 4px solid #c8d6e5;
+    color: #5a6a7e;
+}
+.markdown-body p {
+    line-height: 1.85;
+}
+.markdown-body li {
+    line-height: 1.85;
+}
+.markdown-body a {
+    text-decoration: none;
+    color: #3f51b5;
+    border-bottom: 2px solid transparent;
+}
+.markdown-body a:hover {
+    color: #e91e63;
+    border-bottom-color: #e91e63;
+}

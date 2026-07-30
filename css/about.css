@@ -1,0 +1,91 @@
+/* =============================================================
+   Every Theme - About
+   ============================================================= */
+
+.screen-1__middle{ overflow: visible; }
+
+.screen-1__middle .about-hero{
+    text-align: center;
+    padding: 48px 20px 32px;
+    border-bottom: 1px solid var(--color-border-light);
+}
+.screen-1__middle .about-avatar{
+    width: 100px; height: 100px; border-radius: 50%;
+    border: 3px solid var(--color-border);
+    object-fit: cover;
+}
+.screen-1__middle .about-name{
+    margin: 16px 0 6px;
+    font-size: var(--text-xl); font-weight: var(--weight-semibold);
+    color: var(--color-text);
+}
+.screen-1__middle .about-slogan{
+    margin: 0 0 14px;
+    font-size: var(--text-sm); color: var(--color-text-muted);
+    line-height: 1.8;
+}
+.screen-1__middle .about-slogan em{ color: var(--color-link-hover); font-style: italic; }
+.screen-1__middle .about-links a{
+    display: inline-block; margin: 0 5px;
+    padding: 5px 16px;
+    font-size: var(--text-sm); color: #fff;
+    background: var(--color-link);
+    text-decoration: none;
+    transition: background .2s;
+}
+.screen-1__middle .about-links a:hover{ background: var(--color-link-hover); }
+
+/* sections */
+.screen-1__middle .about-section{
+    padding: 22px var(--space-section);
+    border-bottom: 1px solid var(--color-border-light);
+    transition: background .2s;
+}
+.screen-1__middle .about-section:last-child{ border-bottom: none; }
+.screen-1__middle .about-section:hover{ background: var(--color-card-hover); }
+
+.screen-1__middle .about-section h3{
+    margin: 0 0 10px;
+    font-size: var(--text-sm); font-weight: var(--weight-semibold);
+    color: var(--color-text-secondary); letter-spacing: .06em;
+    text-transform: uppercase;
+    position: relative; padding-left: 14px;
+}
+.screen-1__middle .about-section h3:before{
+    content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 3px; height: 14px; border-radius: 2px;
+    background: var(--color-link);
+}
+.screen-1__middle .about-section p{
+    margin: 8px 0;
+    font-size: var(--text-sm); line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+.screen-1__middle .about-section ul{ margin: 8px 0; padding: 0; list-style: none; }
+.screen-1__middle .about-section ul li{
+    padding: 5px 0;
+    font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 1.6;
+}
+.screen-1__middle .about-section a{
+    color: var(--color-link); text-decoration: none;
+    border-bottom: 1px dashed rgba(74,108,247,.3);
+    transition: .2s;
+}
+.screen-1__middle .about-section a:hover{
+    color: var(--color-link-hover);
+    border-bottom-color: var(--color-link-hover);
+}
+
+.screen-1__middle .about-credits li{
+    display: inline-block; margin: 3px 5px 3px 0;
+    padding: 4px 12px;
+    background: var(--color-card-hover);
+    font-size: var(--text-xs);
+}
+.screen-1__middle .about-credits a{ border-bottom: none; color: var(--color-text-secondary); }
+.screen-1__middle .about-credits li strong{ color: var(--color-link); }
+
+@media screen and (max-width:760px) {
+    .screen-1__middle .about-hero{ padding: 32px 16px 24px; }
+    .screen-1__middle .about-avatar{ width: 80px; height: 80px; }
+}
