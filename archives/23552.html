@@ -75,20 +75,29 @@
         <nav class="header__nav-2">
             
                 
-                <a class="header__nav-item" href="/cssmini_index/">首页</a>
+                <a class="header__nav-item" href="/cssmini_index/"><span data-i18n="nav.home">首页</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/archives">归档</a>
+                <a class="header__nav-item" href="/cssmini_index/archives"><span data-i18n="nav.archives">归档</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/categories">分类</a>
+                <a class="header__nav-item" href="/cssmini_index/categories"><span data-i18n="nav.categories">分类</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/tags">标签</a>
+                <a class="header__nav-item" href="/cssmini_index/tags"><span data-i18n="nav.tags">标签</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/guestbook">留言</a>
+                <a class="header__nav-item" href="/cssmini_index/guestbook"><span data-i18n="nav.guestbook">留言</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/about">关于</a>
+                <a class="header__nav-item" href="/cssmini_index/about"><span data-i18n="nav.about">关于</span></a>
                 
             
         </nav>
+
+        <div class="lang-switch" id="lang-switch">
+            <span class="lang-current" id="lang-current">zh-CN</span>
+            <div class="lang-dropdown" id="lang-dropdown">
+                <a href="#" data-lang="zh-CN">中文</a>
+                <a href="#" data-lang="en">English</a>
+                <a href="#" data-lang="ja">日本語</a>
+            </div>
+        </div>
 
         
         <button class="header__search-toggle" id="search-toggle" aria-label="搜索">
@@ -143,7 +152,7 @@
                         
                         
                     </span>
-                    首页
+                    <span data-i18n="nav.home">首页</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/archives">
@@ -155,7 +164,7 @@
                         
                         
                     </span>
-                    归档
+                    <span data-i18n="nav.archives">归档</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/categories">
@@ -167,7 +176,7 @@
                         
                         
                     </span>
-                    分类
+                    <span data-i18n="nav.categories">分类</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/tags">
@@ -179,7 +188,7 @@
                         
                         
                     </span>
-                    标签
+                    <span data-i18n="nav.tags">标签</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/guestbook">
@@ -191,7 +200,7 @@
                         <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
                         
                     </span>
-                    留言
+                    <span data-i18n="nav.guestbook">留言</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/about">
@@ -203,7 +212,7 @@
                         
                         <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
                     </span>
-                    关于
+                    <span data-i18n="nav.about">关于</span>
                 </a>
                 
             
@@ -358,9 +367,9 @@
             
 <div class="post-copyright">
     <ul>
-        <li><strong>本文作者：</strong>Kinrai</li>
-        <li><strong>本文链接：</strong><a href="https://cssmini.github.io/cssmini_index/cssmini_index/archives/23552.html">https://cssmini.github.io/cssmini_index/cssmini_index/archives/23552.html</a></li>
-        <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+        <li><strong><span data-i18n="article.copyright_author">本文作者</span>：</strong>Kinrai</li>
+        <li><strong><span data-i18n="article.copyright_link">本文链接</span>：</strong><a href="https://cssmini.github.io/cssmini_index/cssmini_index/archives/23552.html">https://cssmini.github.io/cssmini_index/cssmini_index/archives/23552.html</a></li>
+        <li data-i18n="article.copyright_notice">本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。转载请注明出处！</li>
     </ul>
 </div>
 
@@ -384,13 +393,13 @@
         
 <nav class="post-nav">
     
-    <a href="/cssmini_index/archives/29416.html" class="post-nav-item">
-        <span class="post-nav-arrow">&larr;</span>
-        <span class="post-nav-text">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</span>
-    </a>
-    
-    
-    <a href="/cssmini_index/archives/19273.html" class="post-nav-item post-nav-next">
+        <a href="/cssmini_index/archives/29416.html" class="post-nav-item" data-i18n-title="article.prev">
+            <span class="post-nav-arrow">&larr;</span>
+            <span class="post-nav-text">SpringBoot、SpringCloud、dubbo、zookeeper之间的区别</span>
+        </a>
+        
+        
+        <a href="/cssmini_index/archives/19273.html" class="post-nav-item post-nav-next" data-i18n-title="article.next">
         <span class="post-nav-text">HTML加密混淆</span>
         <span class="post-nav-arrow">&rarr;</span>
     </a>
@@ -434,7 +443,7 @@
 <aside class="post-widget" id="post-widget">
     
     <nav class="post-toc-wrap" id="post-toc">
-        <h4 class="post-toc-title">目录</h4>
+        <h4 class="post-toc-title" data-i18n="article.toc">目录</h4>
         <div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据埋点是什么？设置埋点的意义是什么？"><span class="toc-number">1.</span> <span class="toc-text">数据埋点是什么？设置埋点的意义是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据埋点分三个阶段："><span class="toc-number">2.</span> <span class="toc-text">数据埋点分三个阶段：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据埋点的方式"><span class="toc-number">3.</span> <span class="toc-text">数据埋点的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#现在埋点的主流有两种方式："><span class="toc-number">3.1.</span> <span class="toc-text">现在埋点的主流有两种方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关键指标"><span class="toc-number">3.1.1.</span> <span class="toc-text">关键指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访问与访客"><span class="toc-number">3.1.2.</span> <span class="toc-text">访问与访客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#停留时长"><span class="toc-number">3.1.3.</span> <span class="toc-text">停留时长</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#跳出率"><span class="toc-number">3.1.4.</span> <span class="toc-text">跳出率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#退出率"><span class="toc-number">3.1.5.</span> <span class="toc-text">退出率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转化率"><span class="toc-number">3.1.6.</span> <span class="toc-text">转化率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参与度"><span class="toc-number">3.1.7.</span> <span class="toc-text">参与度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#埋点的内容"><span class="toc-number">3.1.8.</span> <span class="toc-text">埋点的内容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于埋点的数据的注意事项"><span class="toc-number">3.2.</span> <span class="toc-text">关于埋点的数据的注意事项</span></a></li></ol></li></ol></div>
     </nav>
     
@@ -463,12 +472,10 @@
     <button class="back-top" id="back-top" aria-label="返回顶部">↑</button>
 
     <script>var SITE_ROOT = '/cssmini_index/';</script>
+<script src="/cssmini_index/js/lang.js"></script>
 <script src="/cssmini_index/js/main.js"></script>
 
 <script src="/cssmini_index/js/search.js"></script>
-
-
-<script src="/cssmini_index/js/hot.js"></script>
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

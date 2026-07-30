@@ -17,6 +17,27 @@
         }
     });
 
+    // language switch
+    var langCurrent = document.getElementById('lang-current');
+    var langDropdown = document.getElementById('lang-dropdown');
+    if (langCurrent && langDropdown) {
+        langCurrent.addEventListener('click', function(e) {
+            e.stopPropagation();
+            langDropdown.classList.toggle('show');
+        });
+        document.addEventListener('click', function() {
+            langDropdown.classList.remove('show');
+        });
+        langDropdown.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.setItem('site-lang', a.dataset.lang);
+                document.cookie = 'lang=' + a.dataset.lang + ';path=/;max-age=31536000';
+                location.reload();
+            });
+        });
+    }
+
     var navBar = document.getElementById('nav-bar');
     var banner = document.querySelector('.header__img');
     var bannerHeight = banner ? banner.offsetHeight : 400;

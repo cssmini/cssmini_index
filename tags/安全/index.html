@@ -74,20 +74,29 @@
         <nav class="header__nav-2">
             
                 
-                <a class="header__nav-item" href="/cssmini_index/">首页</a>
+                <a class="header__nav-item" href="/cssmini_index/"><span data-i18n="nav.home">首页</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/archives">归档</a>
+                <a class="header__nav-item" href="/cssmini_index/archives"><span data-i18n="nav.archives">归档</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/categories">分类</a>
+                <a class="header__nav-item" href="/cssmini_index/categories"><span data-i18n="nav.categories">分类</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/tags">标签</a>
+                <a class="header__nav-item" href="/cssmini_index/tags"><span data-i18n="nav.tags">标签</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/guestbook">留言</a>
+                <a class="header__nav-item" href="/cssmini_index/guestbook"><span data-i18n="nav.guestbook">留言</span></a>
                 
-                <a class="header__nav-item" href="/cssmini_index/about">关于</a>
+                <a class="header__nav-item" href="/cssmini_index/about"><span data-i18n="nav.about">关于</span></a>
                 
             
         </nav>
+
+        <div class="lang-switch" id="lang-switch">
+            <span class="lang-current" id="lang-current">zh-CN</span>
+            <div class="lang-dropdown" id="lang-dropdown">
+                <a href="#" data-lang="zh-CN">中文</a>
+                <a href="#" data-lang="en">English</a>
+                <a href="#" data-lang="ja">日本語</a>
+            </div>
+        </div>
 
         
         <button class="header__search-toggle" id="search-toggle" aria-label="搜索">
@@ -142,7 +151,7 @@
                         
                         
                     </span>
-                    首页
+                    <span data-i18n="nav.home">首页</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/archives">
@@ -154,7 +163,7 @@
                         
                         
                     </span>
-                    归档
+                    <span data-i18n="nav.archives">归档</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/categories">
@@ -166,7 +175,7 @@
                         
                         
                     </span>
-                    分类
+                    <span data-i18n="nav.categories">分类</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/tags">
@@ -178,7 +187,7 @@
                         
                         
                     </span>
-                    标签
+                    <span data-i18n="nav.tags">标签</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/guestbook">
@@ -190,7 +199,7 @@
                         <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
                         
                     </span>
-                    留言
+                    <span data-i18n="nav.guestbook">留言</span>
                 </a>
                 
                 <a class="nav-drawer__item" href="/cssmini_index/about">
@@ -202,7 +211,7 @@
                         
                         <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
                     </span>
-                    关于
+                    <span data-i18n="nav.about">关于</span>
                 </a>
                 
             
@@ -269,17 +278,43 @@
 
             
                 <div class="screen-1__right">
-    <div class="screen-1__right__say hitokoto_wrap" style="cursor:pointer;" title="点击换一句">
-        <h3>说给你听</h3>
-        <p class="screen-1__right__say-content hitokoto_text">加载中...</p>
+    <div class="screen-1__right__say hitokoto_wrap" style="cursor:pointer;" data-i18n-title="sidebar.say">
+        <h3 data-i18n="sidebar.say">说给你听</h3>
+        <p class="screen-1__right__say-content hitokoto_text" data-i18n="sidebar.loading">加载中...</p>
         <p class="screen-1__right__say-content_from hitokoto_from"></p>
     </div>
 
     
     <div class="screen-1__right__list">
-        <h3>&#x1F525; 热门文章</h3>
+        <h3>&#x1F3B2; <span data-i18n="sidebar.recommend">随机推荐</span></h3>
         <div class="hot-wrap" id="hot-list">
-            <span class="hot-loading">加载中...</span>
+            
+            
+            <div class="hot-item">
+                <span class="hot-rank">1.</span>
+                <a href="/cssmini_index/archives/20529.html" class="hot-title">node.js npm webPack 之间的关系</a>
+            </div>
+            
+            <div class="hot-item">
+                <span class="hot-rank">2.</span>
+                <a href="/cssmini_index/archives/41226.html" class="hot-title">博客搭建记录</a>
+            </div>
+            
+            <div class="hot-item">
+                <span class="hot-rank">3.</span>
+                <a href="/cssmini_index/archives/19273.html" class="hot-title">HTML加密混淆</a>
+            </div>
+            
+            <div class="hot-item">
+                <span class="hot-rank">4.</span>
+                <a href="/cssmini_index/archives/23552.html" class="hot-title">什么是数据埋点</a>
+            </div>
+            
+            <div class="hot-item">
+                <span class="hot-rank">5.</span>
+                <a href="/cssmini_index/archives/12383.html" class="hot-title">设计基于HTML5的APP登录功能及安全调用接口的方式（原理篇）</a>
+            </div>
+            
         </div>
     </div>
     
@@ -308,12 +343,10 @@
     <button class="back-top" id="back-top" aria-label="返回顶部">↑</button>
 
     <script>var SITE_ROOT = '/cssmini_index/';</script>
+<script src="/cssmini_index/js/lang.js"></script>
 <script src="/cssmini_index/js/main.js"></script>
 
 <script src="/cssmini_index/js/search.js"></script>
-
-
-<script src="/cssmini_index/js/hot.js"></script>
 
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

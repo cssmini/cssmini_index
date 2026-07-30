@@ -41,7 +41,7 @@
     transition: border-color .15s, background-color .15s;
 }
 .screen-1__middle__archive-month_article-title:hover{
-    border-left-color: var(--color-link);
+    border-left-color: var(--color-link-hover);
     background-color: var(--color-card-hover);
 }
 .screen-1__middle__archive-month_article-title a{
@@ -50,7 +50,7 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     transition: color .15s;
 }
-.screen-1__middle__archive-month_article-title a:hover{ color: var(--color-link); }
+.screen-1__middle__archive-month_article-title a:hover{ color: var(--color-link-hover); }
 
 .screen-1__middle__archive-month_article-about{
     flex-shrink: 0; margin-left: 16px;
