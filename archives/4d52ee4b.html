@@ -17,7 +17,7 @@
 
 
 
-<link rel="canonical" href="https://cssmini.github.io/cssmini_index/cssmini_index/archives/4d52ee4b.html">
+<link rel="canonical" href="https://cssmini.github.io/cssmini_index/archives/4d52ee4b.html">
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/cssmini_index/sitemap.xml">
 
 
@@ -42,15 +42,28 @@
 <link rel="stylesheet" type="text/css" href="/cssmini_index/css/about.css">
 
 
-<link rel="alternate" href="/cssmini_index/cssmini_index/atom.xml" type="application/atom+xml" title="三钱秋水">
+
+<style>:root {
+    --font-body: &#34;Inter&#34;, -apple-system, BlinkMacSystemFont, &#34;Segoe UI&#34;, &#34;PingFang SC&#34;, &#34;Noto Sans SC&#34;, &#34;Microsoft YaHei&#34;, &#34;Hiragino Kaku Gothic ProN&#34;, &#34;Hiragino Sans&#34;, &#34;Yu Gothic&#34;, &#34;Noto Sans JP&#34;, sans-serif;
+    --font-code: &#34;JetBrains Mono&#34;, &#34;Fira Code&#34;, &#34;Cascadia Code&#34;, Consolas, &#34;Liberation Mono&#34;, Menlo, monospace;
+    --text-base: 16px;
+    --text-code: 14px;
+    --leading-base: 1.75;
+    --leading-normal: 1.9;
+    --leading-heading: 1.3;
+    --leading-code: 1.6;
+}</style>
+
+
+<link rel="alternate" href="/cssmini_index/atom.xml" type="application/atom+xml" title="三钱秋水">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="プロジェクト詳細と役割（担当業務）">
 <meta property="og:description" content="1.1 プロジェクト名：E入職（E-Register）紹介 「E入職」は、企業と入社予定者向けのスマート入社手続きプラットフォームです。HR はワンクリックで履歴書をインポート・自動解析し、入社招待を送信できます。入社予定者はモバイル端末で手続きを完了できます。中核機能は動的入社情報フォーム（Dynamic Onboarding Form）で、企業が入社タイプや勤務地などの条件に応じてフォームフィ">
-<meta property="og:url" content="https://cssmini.github.io/cssmini_index/cssmini_index/archives/4d52ee4b.html">
+<meta property="og:url" content="https://cssmini.github.io/cssmini_index/archives/4d52ee4b.html">
 <meta property="og:site_name" content="三钱秋水">
-<meta property="og:image" content="https://cssmini.github.io/cssmini_index/cssmini_index//cssmini_index/favicon.ico">
+<meta property="og:image" content="https://cssmini.github.io/cssmini_index/favicon.ico">
 <meta property="og:locale" content="zh_CN">
 
 <!-- Twitter Card -->
@@ -95,9 +108,9 @@
         <div class="lang-switch" id="lang-switch">
             <span class="lang-current" id="lang-current">zh-CN</span>
             <div class="lang-dropdown" id="lang-dropdown">
-                <a href="#" data-lang="zh-CN">中文</a>
-                <a href="#" data-lang="en">English</a>
-                <a href="#" data-lang="ja">日本語</a>
+                <a href="#" data-lang-option="zh-CN">中文</a>
+                <a href="#" data-lang-option="en">English</a>
+                <a href="#" data-lang-option="ja">日本語</a>
             </div>
         </div>
 
@@ -227,6 +240,14 @@
             </div>
             <ul class="search-result nav-drawer__search-result" id="menu-search-result"></ul>
             
+            <div class="nav-drawer__language" aria-label="语言切换">
+                <span class="nav-drawer__language-icon">文</span>
+                <div class="nav-drawer__language-options">
+                    <a href="#" data-lang-option="zh-CN">中文</a>
+                    <a href="#" data-lang-option="en">English</a>
+                    <a href="#" data-lang-option="ja">日本語</a>
+                </div>
+            </div>
         </nav>
     </div>
     <div class="nav-mask" id="nav-mask"></div>
@@ -260,6 +281,7 @@
     <article class="post-article">
         <div class="post-card">
             <h1 class="post-card-title">プロジェクト詳細と役割（担当業務）</h1>
+            
             <div class="post-meta">
                 
                 <span class="post-meta-item"><time datetime="2026-03-18">2026-03-18</time>
@@ -595,20 +617,6 @@
 <li><strong>製品設定ページ改修</strong>。</li>
 </ul>
 <hr>
-<h2 id="1-19-プロジェクト名：ブロックチェーンクリッパー（Blockchain-Sniper）"><a href="#1-19-プロジェクト名：ブロックチェーンクリッパー（Blockchain-Sniper）" class="headerlink" title="1.19 プロジェクト名：ブロックチェーンクリッパー（Blockchain Sniper）"></a>1.19 プロジェクト名：ブロックチェーンクリッパー（Blockchain Sniper）</h2><p><strong>紹介</strong></p>
-<p>BSC チェーンのハッシュデータ監視ツール。指定コントラクトの大口取引を検知し、Gas 代が高いほどノードにより早く書き込まれる原理を利用して、大口取引より先に買い注文を入れ、大口取引成立後の価格上昇時に即座に売却して差額を獲得するフロントランニングボット（Front-running Bot）。</p>
-<p><strong>プロジェクト使用技術</strong></p>
-<ul>
-<li>JavaScript、PancakeSwap API、BSC ブロードキャストソース</li>
-</ul>
-<p><strong>プロジェクトでの役割</strong></p>
-<p>個人研究開発プロジェクト。</p>
-<p><strong>業務のハイライト</strong></p>
-<ul>
-<li>BSC チェーン上のトランザクションデータ監視ロジックの研究と実装。</li>
-<li>PancakeSwap DEX の API を利用した取引執行の自動化。</li>
-</ul>
-<hr>
 
             </div>
 
@@ -616,6 +624,7 @@
 <div class="post-copyright">
     <ul>
         <li><strong><span data-i18n="article.copyright_author">本文作者</span>：</strong>Kinrai</li>
+        
         <li><strong><span data-i18n="article.copyright_link">本文链接</span>：</strong><a href="https://cssmini.github.io/cssmini_index/archives/4d52ee4b.html">https://cssmini.github.io/cssmini_index/archives/4d52ee4b.html</a></li>
         <li data-i18n="article.copyright_notice">本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。转载请注明出处！</li>
     </ul>
@@ -667,7 +676,7 @@
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="bottom"
-        data-theme="https://cssmini.github.io/cssmini_index/css/giscus-custom.css"
+        data-theme="light"
         data-lang="zh-CN"
         data-loading="eager"
         crossorigin="anonymous"
@@ -687,7 +696,7 @@
     
     <nav class="post-toc-wrap" id="post-toc">
         <h4 class="post-toc-title" data-i18n="article.toc">目录</h4>
-        <div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-プロジェクト名：E入職（E-Register）"><span class="toc-number">1.</span> <span class="toc-text">1.1 プロジェクト名：E入職（E-Register）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-プロジェクト名：案例中心（Case）"><span class="toc-number">2.</span> <span class="toc-text">1.2 プロジェクト名：案例中心（Case）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-プロジェクト名：新行家（eShifu）"><span class="toc-number">3.</span> <span class="toc-text">1.3 プロジェクト名：新行家（eShifu）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-プロジェクト名：学堂対外課程申請平台（Academy）"><span class="toc-number">4.</span> <span class="toc-text">1.4 プロジェクト名：学堂対外課程申請平台（Academy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-プロジェクト名：Tencent-学堂（Q-Learning）"><span class="toc-number">5.</span> <span class="toc-text">1.5 プロジェクト名：Tencent 学堂（Q-Learning）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-プロジェクト名：昇進公示（Rank）"><span class="toc-number">6.</span> <span class="toc-text">1.6 プロジェクト名：昇進公示（Rank）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-プロジェクト名：薪雲給与明細（PayRoll-XinYun）"><span class="toc-number">7.</span> <span class="toc-text">1.7 プロジェクト名：薪雲給与明細（PayRoll-XinYun）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-プロジェクト名：Liao-情緒（Liao-Mood）"><span class="toc-number">8.</span> <span class="toc-text">1.8 プロジェクト名：Liao 情緒（Liao Mood）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-9-プロジェクト名：産陪生双選（Q-Career）"><span class="toc-number">9.</span> <span class="toc-text">1.9 プロジェクト名：産陪生双選（Q-Career）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-10-プロジェクト名：商業保険理賠（Insurance）"><span class="toc-number">10.</span> <span class="toc-text">1.10 プロジェクト名：商業保険理賠（Insurance）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-11-プロジェクト名：直播管理システム（Q-Live）"><span class="toc-number">11.</span> <span class="toc-text">1.11 プロジェクト名：直播管理システム（Q-Live）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-プロジェクト名：E計画（E-Project）"><span class="toc-number">12.</span> <span class="toc-text">1.12 プロジェクト名：E計画（E-Project）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-プロジェクト名：会社発文（Policy）"><span class="toc-number">13.</span> <span class="toc-text">1.13 プロジェクト名：会社発文（Policy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-14-プロジェクト名：雲休暇（Yun-Holiday）"><span class="toc-number">14.</span> <span class="toc-text">1.14 プロジェクト名：雲休暇（Yun Holiday）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-15-プロジェクト名：ワンクリックカバー（SDC-Img-Cover-コンポーネント）"><span class="toc-number">15.</span> <span class="toc-text">1.15 プロジェクト名：ワンクリックカバー（SDC-Img-Cover コンポーネント）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-16-プロジェクト名：オンライン講師システム（Lecture-Proj）"><span class="toc-number">16.</span> <span class="toc-text">1.16 プロジェクト名：オンライン講師システム（Lecture Proj）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17-プロジェクト名：在職核查（OnlineCheck）"><span class="toc-number">17.</span> <span class="toc-text">1.17 プロジェクト名：在職核查（OnlineCheck）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-18-プロジェクト名：製品人力棚卸（PMI）"><span class="toc-number">18.</span> <span class="toc-text">1.18 プロジェクト名：製品人力棚卸（PMI）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-19-プロジェクト名：ブロックチェーンクリッパー（Blockchain-Sniper）"><span class="toc-number">19.</span> <span class="toc-text">1.19 プロジェクト名：ブロックチェーンクリッパー（Blockchain Sniper）</span></a></li></ol></div>
+        <div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-プロジェクト名：E入職（E-Register）"><span class="toc-number">1.</span> <span class="toc-text">1.1 プロジェクト名：E入職（E-Register）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-プロジェクト名：案例中心（Case）"><span class="toc-number">2.</span> <span class="toc-text">1.2 プロジェクト名：案例中心（Case）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-プロジェクト名：新行家（eShifu）"><span class="toc-number">3.</span> <span class="toc-text">1.3 プロジェクト名：新行家（eShifu）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-プロジェクト名：学堂対外課程申請平台（Academy）"><span class="toc-number">4.</span> <span class="toc-text">1.4 プロジェクト名：学堂対外課程申請平台（Academy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-プロジェクト名：Tencent-学堂（Q-Learning）"><span class="toc-number">5.</span> <span class="toc-text">1.5 プロジェクト名：Tencent 学堂（Q-Learning）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-プロジェクト名：昇進公示（Rank）"><span class="toc-number">6.</span> <span class="toc-text">1.6 プロジェクト名：昇進公示（Rank）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-プロジェクト名：薪雲給与明細（PayRoll-XinYun）"><span class="toc-number">7.</span> <span class="toc-text">1.7 プロジェクト名：薪雲給与明細（PayRoll-XinYun）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-プロジェクト名：Liao-情緒（Liao-Mood）"><span class="toc-number">8.</span> <span class="toc-text">1.8 プロジェクト名：Liao 情緒（Liao Mood）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-9-プロジェクト名：産陪生双選（Q-Career）"><span class="toc-number">9.</span> <span class="toc-text">1.9 プロジェクト名：産陪生双選（Q-Career）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-10-プロジェクト名：商業保険理賠（Insurance）"><span class="toc-number">10.</span> <span class="toc-text">1.10 プロジェクト名：商業保険理賠（Insurance）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-11-プロジェクト名：直播管理システム（Q-Live）"><span class="toc-number">11.</span> <span class="toc-text">1.11 プロジェクト名：直播管理システム（Q-Live）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-プロジェクト名：E計画（E-Project）"><span class="toc-number">12.</span> <span class="toc-text">1.12 プロジェクト名：E計画（E-Project）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-プロジェクト名：会社発文（Policy）"><span class="toc-number">13.</span> <span class="toc-text">1.13 プロジェクト名：会社発文（Policy）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-14-プロジェクト名：雲休暇（Yun-Holiday）"><span class="toc-number">14.</span> <span class="toc-text">1.14 プロジェクト名：雲休暇（Yun Holiday）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-15-プロジェクト名：ワンクリックカバー（SDC-Img-Cover-コンポーネント）"><span class="toc-number">15.</span> <span class="toc-text">1.15 プロジェクト名：ワンクリックカバー（SDC-Img-Cover コンポーネント）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-16-プロジェクト名：オンライン講師システム（Lecture-Proj）"><span class="toc-number">16.</span> <span class="toc-text">1.16 プロジェクト名：オンライン講師システム（Lecture Proj）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17-プロジェクト名：在職核查（OnlineCheck）"><span class="toc-number">17.</span> <span class="toc-text">1.17 プロジェクト名：在職核查（OnlineCheck）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-18-プロジェクト名：製品人力棚卸（PMI）"><span class="toc-number">18.</span> <span class="toc-text">1.18 プロジェクト名：製品人力棚卸（PMI）</span></a></li></ol></div>
     </nav>
     
 </aside>
@@ -714,7 +723,7 @@
 
     <button class="back-top" id="back-top" aria-label="返回顶部">↑</button>
 
-    <script>var SITE_ROOT = '/cssmini_index/';</script>
+    <script>var SITE_ROOT = "/cssmini_index/";</script>
 <script src="/cssmini_index/js/lang.js"></script>
 <script src="/cssmini_index/js/main.js"></script>
 

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /archives/180dcba0.html
+Disallow: /tags/
+Disallow: /categories/

@@ -16,6 +16,7 @@
     --text-2xl: 1.5rem;    /* 24px */
     --text-3xl: 1.75rem;   /* 28px */
 
+    --leading-base: 1.75;
     --leading-normal: 1.8;
     --leading-heading: 1.4;
     --leading-code: 1.6;
@@ -65,7 +66,7 @@ body {
     font-family: var(--font-body);
     font-size: var(--text-base);
     font-weight: var(--weight-normal);
-    line-height: 1.75;
+    line-height: var(--leading-base);
     color: var(--color-text);
     background-color: var(--color-bg);
     -webkit-user-select: none;
@@ -148,7 +149,7 @@ code, kbd, pre, samp { font-family: var(--font-code); }
 pre {
     margin: 0 0 1em;
     padding: 1em;
-    font-size: 0.875rem;
+    font-size: var(--text-code, 0.875rem);
     line-height: var(--leading-code);
     overflow-x: auto;
     border-radius: 4px;

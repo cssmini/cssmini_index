@@ -10,7 +10,7 @@
 .screen-1__middle .tag-cloud a{
     display: inline-flex; align-items: center; gap: 4px;
     padding: 6px 18px;
-    font-size: var(--text-sm); color: var(--color-text-secondary);
+    font-size: var(--text-sm); color: var(--color-text);
     background: #fff;
     border: 1px solid var(--color-border);
     border-radius: 20px;

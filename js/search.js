@@ -13,8 +13,11 @@
 
     var JSON_URL = (typeof SITE_ROOT !== 'undefined' ? SITE_ROOT : '/') + 'content.json';
 
-    function loadSearchData() {
-        if (searchData) return;
+    function loadSearchData(callback) {
+        if (searchData) {
+            if (callback) callback(true);
+            return;
+        }
         if (loading) return;
         loading = true;
         var xhr = new XMLHttpRequest();
@@ -25,13 +28,16 @@
                 try {
                     var res = JSON.parse(this.response || this.responseText);
                     searchData = res instanceof Array ? res : (res.posts || []);
-                } catch (e) {
-                    if (searchResult) searchResult.innerHTML = '<li class="search-result__empty">数据加载失败</li>';
-                }
+                    if (callback) callback(true);
+                    return;
+                } catch (e) {}
             }
+            if (callback) callback(false);
+            if (searchResult) searchResult.innerHTML = '<li class="search-result__empty">数据加载失败</li>';
         };
         xhr.onerror = function() {
             loading = false;
+            if (callback) callback(false);
             if (searchResult) searchResult.innerHTML = '<li class="search-result__empty">数据加载失败</li>';
         };
         xhr.send();
@@ -58,44 +64,57 @@
 
     function renderIn(container, posts) {
         if (!container) return;
+        container.innerHTML = '';
         if (!posts.length) {
-            container.innerHTML = '<li class="search-result__empty">未找到匹配结果</li>';
+            container.textContent = '未找到匹配结果';
             return;
         }
-        var html = '';
         posts.forEach(function(post) {
-            var item = {
-                title: post.title,
-                path: (typeof SITE_ROOT !== 'undefined' ? SITE_ROOT : '/') + post.path.replace(/^\//, ''),
-                date: post.date ? post.date.substring(0, 10) : '',
-                tags: (post.tags || []).map(function(t) { return t.name; }).join(' · ')
-            };
-            html += tpl(searchTpl.innerHTML, item);
+            var path = String(post.path || '').replace(/^\/+/, '');
+            var link = document.createElement('a');
+            link.className = 'search-result__link';
+            link.href = (typeof SITE_ROOT !== 'undefined' ? SITE_ROOT : '/') + path;
+            var title = document.createElement('h4');
+            title.className = 'search-result__title';
+            title.textContent = post.title || '';
+            var meta = document.createElement('div');
+            meta.className = 'search-result__meta';
+            meta.textContent = (post.tags || []).map(function(t) { return t.name || ''; }).join(' · ');
+            var date = document.createElement('time');
+            date.className = 'search-result__date';
+            date.textContent = post.date ? post.date.substring(0, 10) : '';
+            meta.appendChild(date);
+            link.appendChild(title);
+            link.appendChild(meta);
+            var item = document.createElement('li');
+            item.className = 'search-result__item';
+            item.appendChild(link);
+            container.appendChild(item);
         });
-        container.innerHTML = html;
     }
 
     function doSearch(keyword, container) {
-        var key = (keyword || '').trim();
+        var key = (keyword || '').trim().slice(0, 100);
         if (!key) {
             if (container) container.innerHTML = '';
             return;
         }
+        var terms = key.split(/\s+/).filter(Boolean).map(function(term) {
+            return term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        });
+        if (!terms.length) return;
+        var reg = new RegExp(terms.join('|'), 'mi');
+        function runSearch() {
+            if (!searchData) return;
+            var result = searchData.filter(function(post) { return matcher(post, reg); });
+            renderIn(container, result);
+        }
         if (!searchData) {
-            loadSearchData();
-            if (container) container.innerHTML = '<li class="search-result__empty">加载中...</li>';
-            setTimeout(function() {
-                if (searchData) {
-                    var reg = new RegExp(key.replace(/\s+/g, '|'), 'mi');
-                    var result = searchData.filter(function(post) { return matcher(post, reg); });
-                    renderIn(container, result);
-                }
-            }, 500);
+            loadSearchData(runSearch);
+            if (container) container.textContent = '加载中...';
             return;
         }
-        var reg = new RegExp(key.replace(/\s+/g, '|'), 'mi');
-        var result = searchData.filter(function(post) { return matcher(post, reg); });
-        renderIn(container, result);
+        runSearch();
     }
 
     // desktop search

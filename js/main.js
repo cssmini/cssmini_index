@@ -11,7 +11,12 @@
 
     // intercept link clicks for loading bar
     document.addEventListener('click', function(e) {
-        var link = e.target.closest('a');
+        var target = e.target;
+        var link = target && target.closest ? target.closest('a') : null;
+        while (!link && target && target !== document) {
+            if (target.nodeType === 1 && target.tagName.toLowerCase() === 'a') link = target;
+            target = target.parentNode;
+        }
         if (link && link.href && link.host === window.location.host && link.getAttribute('target') !== '_blank') {
             startLoading();
         }
@@ -28,15 +33,17 @@
         document.addEventListener('click', function() {
             langDropdown.classList.remove('show');
         });
-        langDropdown.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                localStorage.setItem('site-lang', a.dataset.lang);
-                document.cookie = 'lang=' + a.dataset.lang + ';path=/;max-age=31536000';
-                location.reload();
-            });
-        });
     }
+    document.querySelectorAll('[data-lang-option]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            var selectedLang = a.dataset.langOption;
+            if (['zh-CN', 'en', 'ja'].indexOf(selectedLang) === -1) return;
+            localStorage.setItem('site-lang', selectedLang);
+            document.cookie = 'lang=' + selectedLang + ';path=/;max-age=31536000';
+            location.reload();
+        });
+    });
 
     var navBar = document.getElementById('nav-bar');
     var banner = document.querySelector('.header__img');
@@ -97,7 +104,14 @@
     // search toggle
     var searchToggle = document.getElementById('search-toggle');
     var searchPanel = document.getElementById('search-panel');
+    var searchClose = document.getElementById('search-close');
     var searchKey = document.getElementById('search-key');
+
+    if (searchClose && searchPanel) {
+        searchClose.addEventListener('click', function() {
+            searchPanel.classList.remove('open');
+        });
+    }
 
     if (searchToggle && searchPanel) {
         searchToggle.addEventListener('click', function(e) {
@@ -123,21 +137,33 @@
 
     // 一言（Hitohoto）
     var hitokotoLoaded = false;
+    var hitokotoLoading = false;
+    var hitokotoData = null;
     var hitokotoUrl = (typeof SITE_ROOT !== 'undefined' ? SITE_ROOT : '/') + 'hitohoto.json';
 
     function loadHitokoto() {
+        if (hitokotoLoaded && hitokotoData) {
+            showHitokoto(hitokotoData);
+            return;
+        }
+        if (hitokotoLoading) return;
+        hitokotoLoading = true;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', hitokotoUrl, true);
         xhr.onload = function() {
+            hitokotoLoading = false;
             if (this.status >= 200 && this.status < 300) {
                 try {
                     var res = JSON.parse(this.response || this.responseText);
-                    var hitokotoData = res instanceof Array ? res : (res.posts || []);
+                    hitokotoData = res instanceof Array ? res : (res.posts || []);
                     showHitokoto(hitokotoData);
                 } catch (e) { showFallback(); }
             } else { showFallback(); }
         };
-        xhr.onerror = function() { showFallback(); };
+        xhr.onerror = function() {
+            hitokotoLoading = false;
+            showFallback();
+        };
         xhr.send();
     }
 
@@ -196,7 +222,15 @@
                     if (link) link.parentElement.classList.add('active');
                 }
             }
-            window.addEventListener('scroll', onTocScroll, { passive: true });
+            var tocTicking = false;
+            window.addEventListener('scroll', function() {
+                if (tocTicking) return;
+                tocTicking = true;
+                window.requestAnimationFrame(function() {
+                    tocTicking = false;
+                    onTocScroll();
+                });
+            }, { passive: true });
             onTocScroll();
         }
     }
